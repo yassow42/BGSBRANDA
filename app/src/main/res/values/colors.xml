@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00BF4C</color>
+    <color name="colorPrimaryDark">#0575E6</color>
+    <color name="colorAccent">#0071FB</color>
+    <color name="siyah">#000</color>
+    <color name="beyaz">#fff</color>
+    <color name="mavi">#001EFF</color>
+    <color name="soluk_mavi">#5B89FB</color>
+
+</resources>

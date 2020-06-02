@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ic_siparisler"
+        android:icon="@drawable/ic_siparisler"
+        android:title="Siparişler" />
+    <item
+        android:id="@+id/ic_teklif"
+        android:icon="@drawable/teklif"
+        android:title="Teklif" />
+    <item
+        android:id="@+id/ic_uretim"
+        android:icon="@drawable/uretim"
+        android:title="Üretim" />
+    <item
+        android:id="@+id/ic_montaj"
+        android:icon="@drawable/montaj"
+        android:title="Montaj" />
+
+    <item
+        android:id="@+id/ic_musteri"
+        android:icon="@drawable/ic_musteriler"
+        android:title="Müşteriler" />
+</menu>

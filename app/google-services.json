@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "131847970114",
+    "firebase_url": "https://bgsreklam-4aeb4.firebaseio.com",
+    "project_id": "bgsreklam-4aeb4",
+    "storage_bucket": "bgsreklam-4aeb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131847970114:android:0fa12ff731efe594fb3cdb",
+        "android_client_info": {
+          "package_name": "com.creativeoffice.bgsbranda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131847970114-pde82unign0r2249oa9burtv0ofp3o67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.creativeoffice.bgsbranda",
+            "certificate_hash": "6372cef160a02234351bd92270f7241dec120571"
+          }
+        },
+        {
+          "client_id": "131847970114-v49hqdt1lq3252j1fu91mnskekkmujcc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoqR9Vj4s5CAUMeHVwA1K1aGyUIMAe1SA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131847970114-v49hqdt1lq3252j1fu91mnskekkmujcc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
