@@ -5,62 +5,44 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import android.widget.Toast
+
 import androidx.recyclerview.widget.RecyclerView
-import com.creativeoffice.bgsbranda.Activity.SiparislerActivity
-import com.creativeoffice.bgsbranda.Activity.TeklifActivity
+
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_koruklu_tente.view.*
-import kotlinx.android.synthetic.main.dialog_teklif_ver.view.*
-import kotlinx.android.synthetic.main.dialog_tente.view.*
-import kotlinx.android.synthetic.main.dialog_tente.view.etAcilim
-import kotlinx.android.synthetic.main.dialog_tente.view.etCephe
-import kotlinx.android.synthetic.main.dialog_tente.view.etKumasKodu
-import kotlinx.android.synthetic.main.dialog_tente.view.etProfilRengi
-import kotlinx.android.synthetic.main.dialog_tente.view.etSacakTuru
-import kotlinx.android.synthetic.main.dialog_tente.view.etSacakYazisi
-import kotlinx.android.synthetic.main.dialog_tente.view.etSiparisNotu
-import kotlinx.android.synthetic.main.item_siparis.view.*
-import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriAdi
-import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriTel
-import kotlinx.android.synthetic.main.item_siparis.view.tvSiparisTuru
+
 import kotlinx.android.synthetic.main.item_teklif.view.*
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData>, val kullaniciKey:String) : RecyclerView.Adapter<TeklifAdapter.TeklifHolder>() {
+class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisData>, val kullaniciKey:String) : RecyclerView.Adapter<MontajAdapter.MontajHolder>() {
     val ref = FirebaseDatabase.getInstance().reference
-    val teklifRef = FirebaseDatabase.getInstance().reference.child("Teklifler")
+    val montajRef = FirebaseDatabase.getInstance().reference.child("Teklifler")
 
     var musteriAdi: String? = null
     var musteriTelNo: String? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeklifAdapter.TeklifHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MontajAdapter.MontajHolder {
         val myView = LayoutInflater.from(myContext).inflate(R.layout.item_teklif, parent, false)
 
-        return TeklifHolder(myView)
+        return MontajHolder(myView)
     }
 
     override fun getItemCount(): Int {
-        return teklifler.size
+        return montajList.size
     }
 
-    override fun onBindViewHolder(holder: TeklifAdapter.TeklifHolder, position: Int) {
-        val itemData = teklifler[position]
-        holder.setData(teklifler[position])
-
+    override fun onBindViewHolder(holder: MontajAdapter.MontajHolder, position: Int) {
+        val itemData = montajList[position]
+        holder.setData(montajList[position])
+/*
         holder.itemView.setOnLongClickListener {
             val popup = PopupMenu(myContext, holder.itemView)
             popup.inflate(R.menu.popup_menu_teklif)
@@ -104,7 +86,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                     }
                     R.id.popDüzenleTeklif -> {
                         var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                        var viewDialog = inflate(myContext, R.layout.dialog_teklif_ver, null)
+                        var viewDialog = View.inflate(myContext, R.layout.dialog_teklif_ver, null)
                         viewDialog.etTeklifFiyati.setText(itemData.siparis_teklif.toString())
 
                         builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
@@ -129,7 +111,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                     R.id.popDüzenle -> {
                         if (itemData.siparis_turu == "Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                            var viewDialog = inflate(myContext, R.layout.dialog_tente, null)
+                            var viewDialog = View.inflate(myContext, R.layout.dialog_tente, null)
                             teklifRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -175,7 +157,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                         }
                         if (itemData.siparis_turu == "Körüklü Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                            var viewDialog = inflate(myContext, R.layout.dialog_koruklu_tente, null)
+                            var viewDialog = View.inflate(myContext, R.layout.dialog_koruklu_tente, null)
 
                             teklifRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
@@ -257,7 +239,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
 
             if (itemData.siparis_turu == "Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                var viewDialog = inflate(myContext, R.layout.dialog_tente, null)
+                var viewDialog = View.inflate(myContext, R.layout.dialog_tente, null)
 
                 teklifRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
@@ -281,7 +263,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
             }
             if (itemData.siparis_turu == "Körüklü Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                var viewDialog = inflate(myContext, R.layout.activity_koruklu_tente, null)
+                var viewDialog = View.inflate(myContext, R.layout.activity_koruklu_tente, null)
 
                 teklifRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
@@ -302,7 +284,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                 dialogSiparisTuru.show()
             }
         }
-
+*/
         holder.telNo.setOnClickListener {
             val arama = Intent(Intent.ACTION_DIAL)//Bu kod satırımız bizi rehbere telefon numarası ile yönlendiri.
             arama.data = Uri.parse("tel:" + musteriTelNo)
@@ -310,7 +292,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
         }
     }
 
-    inner class TeklifHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MontajHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var musteriAd = itemView.tvMusteriAdi
         var telNo = itemView.tvMusteriTel
         var siparisTuru = itemView.tvSiparisTuru

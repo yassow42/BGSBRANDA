@@ -29,10 +29,9 @@ class TenteActivity : AppCompatActivity() {
             var siparisNotu = etSiparisNotu.text.toString()
             var siparisKey = ref.child("Siparisler").push().key.toString()
             var siparisTuru = "Tente"
-            var siparisData = SiparisData(siparisNotu, siparisTuru, 0, siparisKey, musteriKey, userID,null, null, null, null,null,null,null)
-
-
-
+            var siparisData = SiparisData(siparisNotu, siparisTuru, 0, siparisKey, musteriKey, userID,null,
+                null,null,null, null, null,
+                null,null,null)
 
 
             ref.child("Siparisler").child(siparisKey).setValue(siparisData).addOnCompleteListener {

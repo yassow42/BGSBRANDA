@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,6 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
     }
 
 
-
     override fun getItemCount(): Int {
         return uretimler.size
     }
@@ -64,7 +64,39 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             popup.inflate(R.menu.popup_menu_uretim)
             popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
                 when (it.itemId) {
+                    R.id.popUretimiTamamla -> {
+                        var alert = AlertDialog.Builder(myContext)
+                            .setTitle("Üretimi tamamla").setMessage("Emin Misin ?").setPositiveButton("Gönder", object : DialogInterface.OnClickListener {
+                                override fun onClick(p0: DialogInterface?, p1: Int) {
+                                    ref.child("Montaj").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
+                                        ref.child("Uretim").child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onCancelled(p0: DatabaseError) {}
+                                            override fun onDataChange(p0: DataSnapshot) {
+                                                try {
+                                                    var tenteData = p0.getValue(SiparisData.TenteData::class.java)!!
+                                                    ref.child("Montaj").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData).addOnCompleteListener {
+                                                        ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten").setValue(kullaniciKey)
+                                                        ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten_zaman").setValue(ServerValue.TIMESTAMP)
+                                                        ref.child("Uretim").child(itemData.siparis_key.toString()).removeValue()
+                                                    }
+                                                } catch (e: Exception) {
+                                                    Log.e("Tek", "Uretim adapter tamamlama hatası")
 
+                                                }
+
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                            .setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(p0: DialogInterface?, p1: Int) {
+                                    p0!!.dismiss()
+                                }
+                            }).create()
+
+                        alert.show()
+                    }
                     R.id.popDüzenle -> {
                         if (itemData.siparis_turu == "Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
@@ -213,7 +245,6 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                         viewDialog.etSiparisNotu.setText(itemData.siparis_notu)
                     }
                 })
-
 
 
                 var dialogSiparisTuru: Dialog = builder.create()

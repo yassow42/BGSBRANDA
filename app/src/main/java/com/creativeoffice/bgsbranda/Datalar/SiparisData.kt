@@ -11,6 +11,8 @@ class SiparisData {
     var siparis_girme_zamani: Long? = null
     var teklif_veren: String? = null
     var teklif_veren_zaman: Long? = null
+    var uretime_gonderen: String? = null
+    var uretime_gonderen_zaman: Long? = null
     var ureten: String? = null
     var ureten_zaman: Long? = null
     var montaj: String? = null
@@ -28,6 +30,8 @@ class SiparisData {
         siparis_girme_zamani: Long?,
         teklif_veren: String?,
         teklif_veren_zaman: Long?,
+        uretime_gonderen: String?,
+        uretime_gonderen_zaman: Long?,
         ureten: String?,
         ureten_zaman: Long?,
         montaj: String?,
@@ -42,6 +46,8 @@ class SiparisData {
         this.siparis_girme_zamani = siparis_girme_zamani
         this.teklif_veren = teklif_veren
         this.teklif_veren_zaman = teklif_veren_zaman
+        this.uretime_gonderen = uretime_gonderen
+        this.uretime_gonderen_zaman = uretime_gonderen_zaman
         this.ureten = ureten
         this.ureten_zaman = ureten_zaman
         this.montaj = montaj
