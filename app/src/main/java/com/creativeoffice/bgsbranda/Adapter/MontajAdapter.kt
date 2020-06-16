@@ -42,6 +42,7 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
     override fun onBindViewHolder(holder: MontajAdapter.MontajHolder, position: Int) {
         val itemData = montajList[position]
         holder.setData(montajList[position])
+
 /*
         holder.itemView.setOnLongClickListener {
             val popup = PopupMenu(myContext, holder.itemView)
@@ -305,12 +306,9 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
             musteriBilgileri(siparisData)
 
             siparisTuru.text = siparisData.siparis_turu
-            if (siparisData.siparis_teklif.toString().isNotEmpty()) {
-                teklifFiyatı.text = siparisData.siparis_teklif.toString() + " tl"
-            } else {
-                teklifFiyatı.text = "Teklif yok"
 
-            }
+           teklifFiyatı.visibility = View.INVISIBLE
+
             if (!siparisData.teklif_veren_zaman.toString().isNullOrEmpty()) {
                 teklifVerenZaman.text = formatData(siparisData.teklif_veren_zaman.toString().toLong())
             }

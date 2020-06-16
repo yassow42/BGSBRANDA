@@ -14,9 +14,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.creativeoffice.bgsbranda.Datalar.MusteriData
 import com.creativeoffice.bgsbranda.R
-import com.creativeoffice.bgsbranda.SiparisTurleriActivity.PergoleActivity
-import com.creativeoffice.bgsbranda.SiparisTurleriActivity.KorukluTenteActivity
-import com.creativeoffice.bgsbranda.SiparisTurleriActivity.MafsalliTenteActivity
+import com.creativeoffice.bgsbranda.SiparisTurleriActivity.*
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.dialog_siparis_ekle.view.*
 import kotlinx.android.synthetic.main.item_musteri.view.*
@@ -64,6 +62,21 @@ class MusteriAdapter(val myContext: Context, val musteriler: ArrayList<MusteriDa
 
             viewDialog.tvKisBahcesi.setOnClickListener {
                 val intent = Intent(myContext, PergoleActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                intent.putExtra("musteriKey",itemData.musteri_key)
+                myContext.startActivity(intent)
+            }
+            viewDialog.tvSemsiye.setOnClickListener {
+                val intent = Intent(myContext, SemsiyeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                intent.putExtra("musteriKey",itemData.musteri_key)
+                myContext.startActivity(intent)
+            }
+            viewDialog.tvKarpuz.setOnClickListener {
+                val intent = Intent(myContext, KarpuzTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                intent.putExtra("musteriKey",itemData.musteri_key)
+                myContext.startActivity(intent)
+            }
+            viewDialog.tvSeffaf.setOnClickListener {
+                val intent = Intent(myContext, SeffafTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 intent.putExtra("musteriKey",itemData.musteri_key)
                 myContext.startActivity(intent)
             }

@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.creativeoffice.bgsbranda.Activity.SiparislerActivity
+import com.creativeoffice.bgsbranda.Activity.TeklifActivity
 import com.creativeoffice.bgsbranda.Activity.UretimActivity
 
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
@@ -100,6 +102,9 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                         if (itemData.siparis_turu == "Mafsallı Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                             var viewDialog = View.inflate(myContext, R.layout.activity_tente_mafsalli, null)
+                            viewDialog.spSacakTuruMafsalli.visibility =View.GONE
+                            viewDialog.spSanzimanYonuMafsalli.visibility =View.GONE
+                            viewDialog.appBarLayoutMafsalli.visibility=View.GONE
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -133,7 +138,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var guncelData = SiparisData.MafsallıTente(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, sanziman, profilRengi, itemData.siparis_key)
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                    myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+                                    myContext.startActivity(Intent(myContext, TeklifActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
                                 }
                             })
@@ -145,7 +151,9 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                         if (itemData.siparis_turu == "Körüklü Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                             var viewDialog = View.inflate(myContext, R.layout.activity_koruklu_tente, null)
-
+                            viewDialog.spSacakTuruKoruk.visibility =View.GONE
+                            viewDialog.chSeritRengiVarMi.visibility =View.GONE
+                            viewDialog.appBarLayoutKoruklu.visibility=View.GONE
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -154,6 +162,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     viewDialog.etAcilim.setText(gelenData.acilim)
                                     viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
                                     viewDialog.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
+                                    viewDialog.etSacakBiyesRengi.setText(gelenData.sacak_biyesi_rengi)
+                                    viewDialog.etSeritRengiAdeti.setText(gelenData.serit_rengi_adeti)
                                     viewDialog.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
                                     viewDialog.etİpYonu.setText(gelenData.ipYonu)
                                     viewDialog.etProfilRengi.setText(gelenData.profilRengi)
@@ -182,10 +192,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var ipyonu = viewDialog.etİpYonu.text.toString()
                                     var profilRengi = viewDialog.etProfilRengi.text.toString()
                                     var siparisNot = viewDialog.etSiparisNotu.text.toString()
-                                    var guncelData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru,sacakBiyesiRengi,seritRengiAdeti, sacakYazisi, ipyonu, profilRengi, itemData.siparis_key.toString())
+                                    var guncelData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakBiyesiRengi, seritRengiAdeti, sacakYazisi, ipyonu, profilRengi, itemData.siparis_key.toString())
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                    myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
                                 }
 
@@ -227,10 +237,12 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
         holder.itemView.setOnClickListener {
 
-            if (itemData.siparis_turu == "Tente") {
+            if (itemData.siparis_turu == "Mafsallı Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                 var viewDialog = View.inflate(myContext, R.layout.activity_tente_mafsalli, null)
-
+                viewDialog.spSacakTuruMafsalli.visibility =View.GONE
+                viewDialog.spSanzimanYonuMafsalli.visibility =View.GONE
+                viewDialog.appBarLayoutMafsalli.visibility=View.GONE
                 builder.setView(viewDialog)
                 uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
@@ -239,7 +251,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                         viewDialog.etCephe.setText(gelenData.cephe)
                         viewDialog.etAcilim.setText(gelenData.acilim)
                         viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
-                        viewDialog.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
+                        viewDialog.etSacakTuruMafsalli.setText(gelenData.sacak_turu)
                         viewDialog.etSacakYazisi.setText(gelenData.sacak_yazisi)
                         viewDialog.etSanziman.setText(gelenData.sanzimanYonu)
                         viewDialog.etProfilRengi.setText(gelenData.profilRengi)
@@ -253,23 +265,25 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             }
             if (itemData.siparis_turu == "Körüklü Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                var viewDialogKoruklu = View.inflate(myContext, R.layout.activity_koruklu_tente, null)
-
+                var viewDialog = View.inflate(myContext, R.layout.activity_koruklu_tente, null)
+                viewDialog.spSacakTuruKoruk.visibility =View.GONE
+                viewDialog.chSeritRengiVarMi.visibility =View.GONE
+                viewDialog.appBarLayoutKoruklu.visibility=View.GONE
                 uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.KorukluTenteData::class.java)!!
-                        viewDialogKoruklu.etCephe.setText(gelenData.cephe)
-                        viewDialogKoruklu.etAcilim.setText(gelenData.acilim)
-                        viewDialogKoruklu.etKumasKodu.setText(gelenData.kumaskodu)
-                        viewDialogKoruklu.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
-                        viewDialogKoruklu.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
-                        viewDialogKoruklu.etİpYonu.setText(gelenData.ipYonu)
-                        viewDialogKoruklu.etProfilRengi.setText(gelenData.profilRengi)
-                        viewDialogKoruklu.etSiparisNotu.setText(itemData.siparis_notu)
+                        viewDialog.etCephe.setText(gelenData.cephe)
+                        viewDialog.etAcilim.setText(gelenData.acilim)
+                        viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
+                        viewDialog.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
+                        viewDialog.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
+                        viewDialog.etİpYonu.setText(gelenData.ipYonu)
+                        viewDialog.etProfilRengi.setText(gelenData.profilRengi)
+                        viewDialog.etSiparisNotu.setText(itemData.siparis_notu)
                     }
                 })
-                builder.setView(viewDialogKoruklu)
+                builder.setView(viewDialog)
                 var dialogSiparisTuru: Dialog = builder.create()
                 dialogSiparisTuru.show()
             }

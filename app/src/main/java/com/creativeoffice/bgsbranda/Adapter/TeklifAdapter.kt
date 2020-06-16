@@ -138,7 +138,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                                                         ref.child("Uretim").child(itemData.siparis_key.toString()).child("ureten_gonderen_zaman").setValue(ServerValue.TIMESTAMP)
                                                         teklifRef.child(itemData.siparis_key.toString()).removeValue()
                                                     }
-                                                    if (itemData.siparis_turu== "Körüklü Tente"){
+                                                    if (itemData.siparis_turu == "Körüklü Tente") {
                                                         var tenteData = p0.child("tenteData").getValue(SiparisData.KorukluTenteData::class.java)!!
                                                         ref.child("Uretim").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData)
                                                         ref.child("Uretim").child(itemData.siparis_key.toString()).child("uretime_gonderen").setValue(kullaniciKey)
@@ -194,6 +194,8 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                         if (itemData.siparis_turu == "Mafsallı Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                             var viewDialog = inflate(myContext, R.layout.activity_tente_mafsalli, null)
+                            viewDialog.spSacakTuruMafsalli.visibility = View.GONE
+                            viewDialog.spSanzimanYonuMafsalli.visibility = View.GONE
                             teklifRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -240,6 +242,8 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                         if (itemData.siparis_turu == "Körüklü Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                             var viewDialog = inflate(myContext, R.layout.activity_koruklu_tente, null)
+                            viewDialog.spSacakTuruKoruk.visibility = View.GONE
+                            viewDialog.chSeritRengiVarMi.visibility = View.GONE
 
                             teklifRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
@@ -248,6 +252,8 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
                                     viewDialog.etCephe.setText(gelenData.cephe)
                                     viewDialog.etAcilim.setText(gelenData.acilim)
                                     viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
+                                    viewDialog.etSacakBiyesRengi.setText(gelenData.sacak_biyesi_rengi)
+                                    viewDialog.etSeritRengiAdeti.setText(gelenData.serit_rengi_adeti)
                                     viewDialog.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
                                     viewDialog.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
                                     viewDialog.etİpYonu.setText(gelenData.ipYonu)

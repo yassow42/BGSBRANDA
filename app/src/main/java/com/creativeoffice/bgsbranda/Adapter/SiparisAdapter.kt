@@ -240,14 +240,8 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                             viewDialog.appBarLayoutKoruklu.visibility = View.GONE
                             viewDialog.spSacakTuruKoruk.visibility = View.GONE
                             viewDialog.appBarLayoutKoruklu.visibility = View.GONE
-                            viewDialog.etSeritRengiAdeti.visibility = View.GONE
-                            viewDialog.chSeritRengiVarMi.setOnClickListener {
-                                if (viewDialog.chSeritRengiVarMi.isChecked) {
-                                    viewDialog.etSeritRengiAdeti.visibility = View.VISIBLE
-                                } else {
-                                    viewDialog.etSeritRengiAdeti.visibility = View.GONE
-                                }
-                            }
+                            viewDialog.etSeritRengiAdeti.visibility = View.VISIBLE
+                            viewDialog.chSeritRengiVarMi.visibility = View.GONE
 
                             siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}

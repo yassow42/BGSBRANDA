@@ -52,5 +52,44 @@
             android:textColor="@color/beyaz"
             android:textSize="18sp"
             android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/tvSemsiye"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4sp"
+            android:background="@color/colorPrimary"
+            android:padding="4sp"
+            android:text="Şemsiye"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/tvKarpuz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4sp"
+            android:background="@color/colorPrimary"
+            android:padding="4sp"
+            android:text="Karpuz Tente"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/tvSeffaf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4sp"
+            android:background="@color/colorPrimary"
+            android:padding="4sp"
+            android:text="Şeffaf"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

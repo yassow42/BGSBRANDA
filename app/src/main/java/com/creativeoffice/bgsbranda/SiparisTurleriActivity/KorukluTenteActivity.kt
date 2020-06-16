@@ -95,7 +95,6 @@ class KorukluTenteActivity : AppCompatActivity() {
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-
                     startActivity(intent)
                 }.addOnFailureListener {
                     Toast.makeText(this, "Sipariş Girilemedi", Toast.LENGTH_LONG).show()

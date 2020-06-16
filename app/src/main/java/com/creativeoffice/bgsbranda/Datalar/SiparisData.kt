@@ -83,4 +83,38 @@ class SiparisData {
 
         
     }
+
+    data class PergoleData(
+        var pergole_turu: String? = null,
+        var cephe: String? = null,
+        var acilim: String? = null,
+        var arka_yukseklik: String? = null,
+        var on_yukseklik: String? = null,
+        var kumas_rengi: String? = null,
+        var profil_rengi: String? = null,
+        var led: String? = null,
+        var motor_yonu: String? = null,
+        var cam_kaydi_olcusu: String? = null,
+        var pergole_cesidi: String? = null,
+        var etrafinda_cam_varmi: String? = null,
+        var siparis_key: String? = null
+    ) {
+
+    }
+
+
+
+
+    data class SemsiyeData (
+        var semsiye_turu: String? = null,
+        var genislik: String? = null,
+        var kumas_rengi: String? = null,
+        var sacak_yazisi: String? = null,
+        var siparis_key: String? = null
+    ) {
+
+
+    }
+
+
 }
