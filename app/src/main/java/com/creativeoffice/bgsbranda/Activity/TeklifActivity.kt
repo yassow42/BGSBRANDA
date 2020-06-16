@@ -1,13 +1,17 @@
 package com.creativeoffice.bgsbranda.Activity
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.TeklifAdapter
 import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
+import com.creativeoffice.bgsbranda.LoadingDialog
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -24,13 +28,31 @@ class TeklifActivity : AppCompatActivity() {
     lateinit var teklifList: ArrayList<SiparisData>
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
+
+    var loading: Dialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teklif)
         setupNavigationView()
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
-        setupVeri()
+        dialogCalistir()
+        Handler().postDelayed({ setupVeri() }, 1500)
+        Handler().postDelayed({ dialogGizle() }, 5000)
+
+    }
+
+    fun dialogGizle() {
+        loading?.let { if (it.isShowing) it.cancel() }
+
+    }
+
+    fun dialogCalistir() {
+        dialogGizle()
+        loading = LoadingDialog.startDialog(this)
     }
 
     private fun setupVeri() {
@@ -46,8 +68,9 @@ class TeklifActivity : AppCompatActivity() {
                         try {
                             var gelenData = ds.getValue(SiparisData::class.java)!!
                             teklifList.add(gelenData)
-                        }catch (e:Exception){
-                            Log.e("teklifData","Teklif data alırken hata var. $e")
+                            dialogGizle()
+                        } catch (e: Exception) {
+                            Log.e("teklifData", "Teklif data alırken hata var. $e")
                         }
                     }
                     setupRecyclerView()
@@ -60,8 +83,8 @@ class TeklifActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         rcTeklifler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-         val adapter = TeklifAdapter(this, teklifList, userID)
-         rcTeklifler.adapter = adapter
+        val adapter = TeklifAdapter(this, teklifList, userID)
+        rcTeklifler.adapter = adapter
         rcTeklifler.setHasFixedSize(true)
     }
 

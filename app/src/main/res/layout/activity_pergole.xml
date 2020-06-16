@@ -8,11 +8,36 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutKoruklu"
-        app:srcCompat="@drawable/koruklu_tente" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPergole"
+        app:srcCompat="@drawable/kis_bahcesi" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/appBarLayoutPergole"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:background="#4CAF50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvSiparisEkle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="Ekle"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
         android:id="@+id/tableLayout"
@@ -22,6 +47,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+
 
 
         <TableRow
@@ -111,20 +138,14 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saçak Türü"
+                android:text="Saçak"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/siyah"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spSacakTuruKoruk"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dialog" />
-
             <EditText
-                android:id="@+id/etSacakTuruKoruklu"
+                android:id="@+id/etSacakTuruPergole"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
@@ -133,76 +154,6 @@
                 android:inputType="textPersonName"
                 android:textColor="@color/beyaz"
                 android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saçak Biyesi Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/etSacakBiyesRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-
-                android:id="@+id/tvSeritRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Şerit Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/chSeritRengiVarMi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="Var Mı ? "
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:typeface="monospace" />
-
-            <EditText
-                android:id="@+id/etSeritRengiAdeti"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Adet"
-                android:inputType="textPersonName"
-                android:textColor="@color/beyaz"
-                android:textColorHint="@color/beyaz"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-
         </TableRow>
 
         <TableRow
@@ -313,45 +264,5 @@
 
         </TableRow>
     </TableLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLayoutKoruklu"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvSiparisEkle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="Ekle"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Körüklü Tente"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

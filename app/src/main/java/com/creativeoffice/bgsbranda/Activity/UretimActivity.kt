@@ -1,14 +1,18 @@
 package com.creativeoffice.bgsbranda.Activity
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.UretimAdapter
 
 import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
+import com.creativeoffice.bgsbranda.LoadingDialog
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -20,20 +24,35 @@ import kotlinx.android.synthetic.main.activity_uretim.*
 
 class UretimActivity : AppCompatActivity() {
     private val ACTIVITY_NO = 2
-    lateinit var uretimList:ArrayList<SiparisData>
+    lateinit var uretimList: ArrayList<SiparisData>
 
     val ref = FirebaseDatabase.getInstance().reference
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
 
+    var loading: Dialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uretim)
         setupNavigationView()
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
-        setupVeri()
 
+        dialogCalistir()
+        Handler().postDelayed({ setupVeri() }, 1500)
+        Handler().postDelayed({ dialogGizle() }, 5000)
+
+    }
+
+    fun dialogGizle() {
+        loading?.let { if (it.isShowing) it.cancel() }
+
+    }
+
+    fun dialogCalistir() {
+        dialogGizle()
+        loading = LoadingDialog.startDialog(this)
     }
 
     private fun setupVeri() {
@@ -41,6 +60,7 @@ class UretimActivity : AppCompatActivity() {
         ref.child("Uretim").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.hasChildren()) {
                     for (ds in p0.children) {
@@ -49,9 +69,10 @@ class UretimActivity : AppCompatActivity() {
                             uretimList.add(gelenData)
 
                         } catch (ex: Exception) {
-                            Log.e("uretimDataHatası ",ex.message.toString())
+                            Log.e("uretimDataHatası ", ex.message.toString())
                         }
                     }
+                    dialogGizle()
                     setupRecyclerView()
                 }
             }
@@ -61,7 +82,7 @@ class UretimActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         rcUretim.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val adapter = UretimAdapter(this, uretimList,userID)
+        val adapter = UretimAdapter(this, uretimList, userID)
         rcUretim.adapter = adapter
         rcUretim.setHasFixedSize(true)
     }

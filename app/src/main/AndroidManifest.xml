@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MontajActivity"></activity>
+        <activity android:name=".SiparisTurleriActivity.PergoleActivity"></activity>
+        <activity android:name=".Activity.MontajActivity" />
         <activity android:name=".Activity.UretimActivity" />
         <activity android:name=".Activity.TeklifActivity" />
         <activity android:name=".SiparisTurleriActivity.KorukluTenteActivity" />
-        <activity android:name=".SiparisTurleriActivity.TenteActivity" />
+        <activity android:name=".SiparisTurleriActivity.MafsalliTenteActivity" />
         <activity android:name=".Activity.MusterilerActivity" />
         <activity android:name=".Activity.SiparislerActivity" />
         <activity android:name=".Activity.LoginActivity">

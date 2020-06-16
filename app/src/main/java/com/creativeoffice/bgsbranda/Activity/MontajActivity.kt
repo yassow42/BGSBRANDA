@@ -1,13 +1,17 @@
 package com.creativeoffice.bgsbranda.Activity
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.MontajAdapter
 import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
+import com.creativeoffice.bgsbranda.LoadingDialog
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -24,7 +28,8 @@ class MontajActivity : AppCompatActivity() {
     lateinit var userID: String
     lateinit var kullaniciAdi: String
 
-    lateinit var montajList:ArrayList<SiparisData>
+    lateinit var montajList: ArrayList<SiparisData>
+    var loading :Dialog?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +37,31 @@ class MontajActivity : AppCompatActivity() {
         setupNavigationView()
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
-setupVeri()
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        dialogCalistir()
+        Handler().postDelayed({ setupVeri() }, 1500)
+        Handler().postDelayed({ dialogGizle() }, 5000)
+
     }
+
+    fun dialogGizle() {
+        loading?.let { if (it.isShowing) it.cancel() }
+
+    }
+
+    fun dialogCalistir() {
+        dialogGizle()
+        loading = LoadingDialog.startDialog(this)
+    }
+
 
     private fun setupVeri() {
         montajList = ArrayList()
         ref.child("Montaj").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.hasChildren()) {
                     for (ds in p0.children) {
@@ -48,9 +70,10 @@ setupVeri()
                             montajList.add(gelenData)
 
                         } catch (ex: Exception) {
-                            Log.e("montajDataHatası ",ex.message.toString())
+                            Log.e("montajDataHatası ", ex.message.toString())
                         }
                     }
+                    dialogGizle()
                     setupRecyclerView()
                 }
             }

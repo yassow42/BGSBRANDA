@@ -19,14 +19,13 @@ import com.creativeoffice.bgsbranda.Datalar.SiparisData
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_koruklu_tente.view.*
-import kotlinx.android.synthetic.main.dialog_tente.view.*
-import kotlinx.android.synthetic.main.dialog_tente.view.etAcilim
-import kotlinx.android.synthetic.main.dialog_tente.view.etCephe
-import kotlinx.android.synthetic.main.dialog_tente.view.etKumasKodu
-import kotlinx.android.synthetic.main.dialog_tente.view.etProfilRengi
-import kotlinx.android.synthetic.main.dialog_tente.view.etSacakTuru
-import kotlinx.android.synthetic.main.dialog_tente.view.etSacakYazisi
-import kotlinx.android.synthetic.main.dialog_tente.view.etSiparisNotu
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etAcilim
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etCephe
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etKumasKodu
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etProfilRengi
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etSacakYazisi
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etSiparisNotu
+import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.*
 
 import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriAdi
 import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriTel
@@ -73,7 +72,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                             override fun onCancelled(p0: DatabaseError) {}
                                             override fun onDataChange(p0: DataSnapshot) {
                                                 try {
-                                                    var tenteData = p0.getValue(SiparisData.TenteData::class.java)!!
+                                                    var tenteData = p0.getValue(SiparisData.MafsallıTente::class.java)!!
                                                     ref.child("Montaj").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData).addOnCompleteListener {
                                                         ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten").setValue(kullaniciKey)
                                                         ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten_zaman").setValue(ServerValue.TIMESTAMP)
@@ -98,18 +97,18 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                         alert.show()
                     }
                     R.id.popDüzenle -> {
-                        if (itemData.siparis_turu == "Tente") {
+                        if (itemData.siparis_turu == "Mafsallı Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                            var viewDialog = View.inflate(myContext, R.layout.dialog_tente, null)
+                            var viewDialog = View.inflate(myContext, R.layout.activity_tente_mafsalli, null)
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
-                                    var gelenData = p0.getValue(SiparisData.TenteData::class.java)!!
-                                    viewDialog.etCephe.setText(gelenData.tente_cephe)
-                                    viewDialog.etAcilim.setText(gelenData.tente_acilim)
-                                    viewDialog.etKumasKodu.setText(gelenData.tente_kumaskodu)
-                                    viewDialog.etSacakTuru.setText(gelenData.tente_sacak)
-                                    viewDialog.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
+                                    var gelenData = p0.getValue(SiparisData.MafsallıTente::class.java)!!
+                                    viewDialog.etCephe.setText(gelenData.cephe)
+                                    viewDialog.etAcilim.setText(gelenData.acilim)
+                                    viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
+                                    viewDialog.etSacakTuruMafsalli.setText(gelenData.sacak_turu)
+                                    viewDialog.etSacakYazisi.setText(gelenData.sacak_yazisi)
                                     viewDialog.etSanziman.setText(gelenData.sanzimanYonu)
                                     viewDialog.etProfilRengi.setText(gelenData.profilRengi)
                                     viewDialog.etSiparisNotu.setText(itemData.siparis_notu)
@@ -126,12 +125,12 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var cephe = viewDialog.etCephe.text.toString()
                                     var acilim = viewDialog.etAcilim.text.toString()
                                     var kumasKodu = viewDialog.etKumasKodu.text.toString()
-                                    var sacakTuru = viewDialog.etSacakTuru.text.toString()
+                                    var sacakTuru = viewDialog.etSacakTuruMafsalli.text.toString()
                                     var sacakYazisi = viewDialog.etSacakYazisi.text.toString()
                                     var sanziman = viewDialog.etSanziman.text.toString()
                                     var profilRengi = viewDialog.etProfilRengi.text.toString()
                                     var siparisNot = viewDialog.etSiparisNotu.text.toString()
-                                    var guncelData = SiparisData.TenteData(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, sanziman, profilRengi, itemData.siparis_key)
+                                    var guncelData = SiparisData.MafsallıTente(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, sanziman, profilRengi, itemData.siparis_key)
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
                                     myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
@@ -145,16 +144,16 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                         }
                         if (itemData.siparis_turu == "Körüklü Tente") {
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                            var viewDialog = View.inflate(myContext, R.layout.dialog_koruklu_tente, null)
+                            var viewDialog = View.inflate(myContext, R.layout.activity_koruklu_tente, null)
 
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
                                     var gelenData = p0.getValue(SiparisData.KorukluTenteData::class.java)!!
-                                    viewDialog.etCephe.setText(gelenData.tente_cephe)
-                                    viewDialog.etAcilim.setText(gelenData.tente_acilim)
-                                    viewDialog.etKumasKodu.setText(gelenData.tente_kumaskodu)
-                                    viewDialog.etSacakTuru.setText(gelenData.tente_sacak)
+                                    viewDialog.etCephe.setText(gelenData.cephe)
+                                    viewDialog.etAcilim.setText(gelenData.acilim)
+                                    viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
+                                    viewDialog.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
                                     viewDialog.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
                                     viewDialog.etİpYonu.setText(gelenData.ipYonu)
                                     viewDialog.etProfilRengi.setText(gelenData.profilRengi)
@@ -176,12 +175,14 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var cephe = viewDialog.etCephe.text.toString()
                                     var acilim = viewDialog.etAcilim.text.toString()
                                     var kumasKodu = viewDialog.etKumasKodu.text.toString()
-                                    var sacakTuru = viewDialog.etSacakTuru.text.toString()
+                                    var sacakTuru = viewDialog.etSacakTuruKoruklu.text.toString()
+                                    var sacakBiyesiRengi = viewDialog.etSacakBiyesRengi.text.toString()
+                                    var seritRengiAdeti = viewDialog.etSeritRengiAdeti.text.toString()
                                     var sacakYazisi = viewDialog.etSacakYazisi.text.toString()
                                     var ipyonu = viewDialog.etİpYonu.text.toString()
                                     var profilRengi = viewDialog.etProfilRengi.text.toString()
                                     var siparisNot = viewDialog.etSiparisNotu.text.toString()
-                                    var guncelData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, ipyonu, profilRengi, itemData.siparis_key)
+                                    var guncelData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru,sacakBiyesiRengi,seritRengiAdeti, sacakYazisi, ipyonu, profilRengi, itemData.siparis_key.toString())
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
                                     myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
@@ -228,18 +229,18 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
             if (itemData.siparis_turu == "Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
-                var viewDialog = View.inflate(myContext, R.layout.dialog_tente, null)
+                var viewDialog = View.inflate(myContext, R.layout.activity_tente_mafsalli, null)
 
                 builder.setView(viewDialog)
                 uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
-                        var gelenData = p0.getValue(SiparisData.TenteData::class.java)!!
-                        viewDialog.etCephe.setText(gelenData.tente_cephe)
-                        viewDialog.etAcilim.setText(gelenData.tente_acilim)
-                        viewDialog.etKumasKodu.setText(gelenData.tente_kumaskodu)
-                        viewDialog.etSacakTuru.setText(gelenData.tente_sacak)
-                        viewDialog.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
+                        var gelenData = p0.getValue(SiparisData.MafsallıTente::class.java)!!
+                        viewDialog.etCephe.setText(gelenData.cephe)
+                        viewDialog.etAcilim.setText(gelenData.acilim)
+                        viewDialog.etKumasKodu.setText(gelenData.kumaskodu)
+                        viewDialog.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
+                        viewDialog.etSacakYazisi.setText(gelenData.sacak_yazisi)
                         viewDialog.etSanziman.setText(gelenData.sanzimanYonu)
                         viewDialog.etProfilRengi.setText(gelenData.profilRengi)
                         viewDialog.etSiparisNotu.setText(itemData.siparis_notu)
@@ -258,10 +259,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.KorukluTenteData::class.java)!!
-                        viewDialogKoruklu.etCephe.setText(gelenData.tente_cephe)
-                        viewDialogKoruklu.etAcilim.setText(gelenData.tente_acilim)
-                        viewDialogKoruklu.etKumasKodu.setText(gelenData.tente_kumaskodu)
-                        viewDialogKoruklu.etSacakTuru.setText(gelenData.tente_sacak)
+                        viewDialogKoruklu.etCephe.setText(gelenData.cephe)
+                        viewDialogKoruklu.etAcilim.setText(gelenData.acilim)
+                        viewDialogKoruklu.etKumasKodu.setText(gelenData.kumaskodu)
+                        viewDialogKoruklu.etSacakTuruKoruklu.setText(gelenData.sacak_turu)
                         viewDialogKoruklu.etSacakYazisi.setText(gelenData.tente_sacak_yazisi)
                         viewDialogKoruklu.etİpYonu.setText(gelenData.ipYonu)
                         viewDialogKoruklu.etProfilRengi.setText(gelenData.profilRengi)

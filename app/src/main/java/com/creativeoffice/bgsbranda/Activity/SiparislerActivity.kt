@@ -1,13 +1,17 @@
 package com.creativeoffice.bgsbranda.Activity
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.SiparisAdapter
 import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
+import com.creativeoffice.bgsbranda.LoadingDialog
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -19,30 +23,43 @@ import kotlinx.android.synthetic.main.activity_siparisler.*
 
 class SiparislerActivity : AppCompatActivity() {
     private val ACTIVITY_NO = 0
-    lateinit var siparislerList: ArrayList<SiparisData>
+    var siparislerList = ArrayList<SiparisData>()
     val ref = FirebaseDatabase.getInstance().reference
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
 
-
+    var loading: Dialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_siparisler)
         setupNavigationView()
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        siparislerList = ArrayList()
-        siparisVerileri()
+        dialogCalistir()
+        Handler().postDelayed({ setupVeri() }, 1500)
+        Handler().postDelayed({ dialogGizle() }, 5000)
 
     }
 
-    private fun siparisVerileri() {
+    fun dialogGizle() {
+        loading?.let { if (it.isShowing) it.cancel() }
+
+    }
+
+    fun dialogCalistir() {
+        dialogGizle()
+        loading = LoadingDialog.startDialog(this)
+    }
+
+    private fun setupVeri() {
 
 
         ref.child("Siparisler").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.hasChildren()) {
                     for (ds in p0.children) {
@@ -51,9 +68,10 @@ class SiparislerActivity : AppCompatActivity() {
                             siparislerList.add(gelenData)
 
                         } catch (ex: Exception) {
-                            Log.e("siparisDataHatası ",ex.message.toString())
+                            Log.e("siparisDataHatası ", ex.message.toString())
                         }
                     }
+                    dialogGizle()
                     setupRecyclerView()
                 }
             }
@@ -63,7 +81,7 @@ class SiparislerActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         rcSiparisler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val adapter = SiparisAdapter(this, siparislerList,userID)
+        val adapter = SiparisAdapter(this, siparislerList, userID)
         rcSiparisler.adapter = adapter
         rcSiparisler.setHasFixedSize(true)
     }

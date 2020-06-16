@@ -55,12 +55,12 @@ class SiparisData {
     }
 
 
-    data class TenteData(
-        var tente_cephe: String? = null,
-        var tente_acilim: String? = null,
-        var tente_kumaskodu: String? = null,
-        var tente_sacak: String? = null,
-        var tente_sacak_yazisi: String? = null,
+    data class MafsallıTente(
+        var cephe: String? = null,
+        var acilim: String? = null,
+        var kumaskodu: String? = null,
+        var sacak_turu: String? = null,
+        var sacak_yazisi: String? = null,
         var sanzimanYonu: String? = null,
         var profilRengi: String? = null,
         var siparis_key: String? = null
@@ -69,15 +69,18 @@ class SiparisData {
     }
 
     data class KorukluTenteData(
-        var tente_cephe: String? = null,
-        var tente_acilim: String? = null,
-        var tente_kumaskodu: String? = null,
-        var tente_sacak: String? = null,
+        var cephe: String? = null,
+        var acilim: String? = null,
+        var kumaskodu: String? = null,
+        var sacak_turu: String? = null,
+        var sacak_biyesi_rengi:String?=null,
+        var serit_rengi_adeti:String?=null,
         var tente_sacak_yazisi: String? = null,
         var ipYonu: String? = null,
         var profilRengi: String? = null,
         var siparis_key: String? = null
     ) {
 
+        
     }
 }
