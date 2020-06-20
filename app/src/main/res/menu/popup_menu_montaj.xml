@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/popMontajıTamamla"
+        android:title="Montajı Tamamla" />
+
+    <item
+        android:id="@+id/popDüzenleMontaj"
+        android:title="Siparişi Düzenle" />
+    <item
+        android:id="@+id/popSil"
+        android:title="Sil" />
+</menu>

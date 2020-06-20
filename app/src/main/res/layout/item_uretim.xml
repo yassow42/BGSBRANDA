@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/bg_mavi_kirmizi">
+    android:background="@drawable/bg_item_siparis">
 
 
     <TextView
@@ -15,12 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
         android:text="Yasin İNCE"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,6 +26,8 @@
         android:id="@+id/tvUretenAdi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="dsa"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
@@ -54,7 +54,7 @@
         android:id="@+id/tvMusteriTel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="05419617054"
         android:textColor="@color/beyaz"
         android:textSize="12sp"

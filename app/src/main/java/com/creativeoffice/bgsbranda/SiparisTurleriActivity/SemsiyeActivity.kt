@@ -47,7 +47,7 @@ class SemsiyeActivity : AppCompatActivity() {
                 ref.child("Siparisler").child(siparisKey).child("siparis_girme_zamani").setValue(ServerValue.TIMESTAMP)
 
 
-                val genislik = etGenislik.text.toString()
+                val genislik = etGenislikSemsiye.text.toString()
                 val sacakYazisi = etSacakYazisiSemsiye.text.toString()
                 val kumasRengi = etKumasRengiSemsiye.text.toString()
 

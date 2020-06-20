@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/icon"
+        android:label="BGS Reklam"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SiparisTurleriActivity.SeffafTenteActivity"></activity>
@@ -22,7 +22,8 @@
         <activity android:name=".SiparisTurleriActivity.MafsalliTenteActivity" />
         <activity android:name=".Activity.MusterilerActivity" />
         <activity android:name=".Activity.SiparislerActivity" />
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name=".Activity.LoginActivity"/>
+        <activity android:name=".Activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

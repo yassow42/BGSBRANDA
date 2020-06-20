@@ -117,4 +117,37 @@ class SiparisData {
     }
 
 
+    data class KarpuzData (
+
+        var genislik: String? = null,
+        var yukseklik: String? = null,
+        var kumas_rengi: String? = null,
+        var sacak_turu: String? = null,
+        var sacak_yazisi: String? = null,
+        var biye_rengi: String? = null,
+        var serit_rengi: String? = null,
+        var siparis_key: String? = null
+    ) {
+
+
+    }
+
+    data class SeffafData (
+
+        var seffaf_mika_eni: String? = null,
+        var pvc_rengi: String? = null,
+        var alt_pvc: String? = null,
+        var ust_pvc: String? = null,
+        var fermuar: String? = null,
+        var boru_yeri: String? = null,
+        var ekstra_sacak: String? = null,
+        var siparis_key: String? = null
+
+
+    ) {
+
+
+    }
+
+
 }

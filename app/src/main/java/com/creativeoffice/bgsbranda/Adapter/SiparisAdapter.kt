@@ -18,10 +18,15 @@ import com.creativeoffice.bgsbranda.Activity.TeklifActivity
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_karpuz_tente.view.*
 import kotlinx.android.synthetic.main.activity_koruklu_tente.*
 import kotlinx.android.synthetic.main.activity_koruklu_tente.view.*
+import kotlinx.android.synthetic.main.activity_koruklu_tente.view.appBarLayoutKoruklu
 import kotlinx.android.synthetic.main.activity_koruklu_tente.view.chSeritRengiVarMi
 import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etSeritRengiAdeti
+import kotlinx.android.synthetic.main.activity_pergole.view.*
+import kotlinx.android.synthetic.main.activity_seffaf_tente.view.*
+import kotlinx.android.synthetic.main.activity_semsiye.view.*
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.*
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.appBarLayoutMafsalli
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.etAcilim
@@ -111,6 +116,116 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                 var dialogSiparisTuru: Dialog = builder.create()
                 dialogSiparisTuru.show()
             }
+            if (itemData.siparis_turu == "Pergole") {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                var viewDialog = inflate(myContext, R.layout.activity_pergole, null)
+                viewDialog.imgPergole.visibility = View.GONE
+                viewDialog.appBarLayoutPergole.visibility = View.GONE
+                viewDialog.spPergoleTuru.visibility = View.GONE
+                viewDialog.spPergoleCesidi.visibility = View.GONE
+                viewDialog.spMotorYonu.visibility = View.GONE
+                viewDialog.chCamKaydi.visibility = View.GONE
+                viewDialog.chCamVarMiVar.visibility = View.GONE
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var gelenData = p0.getValue(SiparisData.PergoleData::class.java)!!
+                        viewDialog.etPergoleTuru.setText(gelenData.pergole_turu)
+                        viewDialog.etCephePergole.setText(gelenData.cephe)
+                        viewDialog.etArkaYukseklik.setText(gelenData.arka_yukseklik)
+                        viewDialog.etOnYukseklik.setText(gelenData.on_yukseklik)
+                        viewDialog.etAcilimPergole.setText(gelenData.acilim)
+                        viewDialog.etKumasRengi.setText(gelenData.kumas_rengi)
+                        viewDialog.etProfilRengiPergole.setText(gelenData.profil_rengi)
+                        viewDialog.etLed.setText(gelenData.led)
+                        viewDialog.etMotorYonu.setText(gelenData.motor_yonu)
+                        viewDialog.etCamKaydi.setText(gelenData.cam_kaydi_olcusu)
+                        viewDialog.etCamVarmi.setText(gelenData.etrafinda_cam_varmi)
+                        viewDialog.etPergoleCesidi.setText(gelenData.pergole_cesidi)
+                        viewDialog.etSiparisNotuPergole.setText(itemData.siparis_notu)
+                    }
+                })
+                builder.setView(viewDialog)
+                var dialogSiparisTuru: Dialog = builder.create()
+                dialogSiparisTuru.show()
+            }
+            if (itemData.siparis_turu == "Şemsiye") {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                var viewDialog = inflate(myContext, R.layout.activity_semsiye, null)
+             //   viewDialog.imgSemsiye.visibility = View.GONE
+                viewDialog.appBarLayoutSemsiye.visibility = View.GONE
+                viewDialog.spSemsiyeTuru.visibility = View.GONE
+
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var gelenData = p0.getValue(SiparisData.SemsiyeData::class.java)!!
+                        viewDialog.etSemsiyeTuru.setText(gelenData.semsiye_turu)
+                        viewDialog.etGenislikSemsiye.setText(gelenData.genislik)
+                        viewDialog.etKumasRengiSemsiye.setText(gelenData.kumas_rengi)
+                        viewDialog.etSacakYazisiSemsiye.setText(gelenData.sacak_yazisi)
+                        viewDialog.etSiparisNotuSemsiye.setText(itemData.siparis_notu)
+                    }
+                })
+                builder.setView(viewDialog)
+                var dialogSiparisTuru: Dialog = builder.create()
+                dialogSiparisTuru.show()
+            }
+            if (itemData.siparis_turu == "Karpuz Tente") {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                var viewDialog = inflate(myContext, R.layout.activity_karpuz_tente, null)
+             //   viewDialog.imgSemsiye.visibility = View.GONE
+                viewDialog.appBarLayoutKarpuz.visibility = View.GONE
+                viewDialog.spSacakTuruKarpuz.visibility = View.GONE
+
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var gelenData = p0.getValue(SiparisData.KarpuzData::class.java)!!
+                        viewDialog.etGenislikKarpuz.setText(gelenData.genislik)
+                        viewDialog.etYukseklikKarpuz.setText(gelenData.yukseklik)
+                        viewDialog.etKumasRengiKarpuz.setText(gelenData.kumas_rengi)
+                        viewDialog.etSacakTürüKarpuz.setText(gelenData.sacak_turu)
+                        viewDialog.etSacakYazisiKarpuz.setText(gelenData.sacak_yazisi)
+                        viewDialog.etBiyeRengiKarpuz.setText(gelenData.biye_rengi)
+                        viewDialog.etSeritRengiKarpuz.setText(gelenData.serit_rengi)
+                        viewDialog.etSiparisNotuKarpuz.setText(itemData.siparis_notu)
+                    }
+                })
+                builder.setView(viewDialog)
+                var dialogSiparisTuru: Dialog = builder.create()
+                dialogSiparisTuru.show()
+            }
+            if (itemData.siparis_turu == "Şeffaf") {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                var viewDialog = inflate(myContext, R.layout.activity_seffaf_tente, null)
+             //   viewDialog.imgSemsiye.visibility = View.GONE
+                viewDialog.appBarLayoutSeffaf.visibility = View.GONE
+                viewDialog.spFermuar.visibility = View.GONE
+                viewDialog.spBoruYeri.visibility = View.GONE
+
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var gelenData = p0.getValue(SiparisData.SeffafData::class.java)!!
+                        viewDialog.etMikaEni.setText(gelenData.seffaf_mika_eni)
+                        viewDialog.etPVCRengi.setText(gelenData.pvc_rengi)
+                        viewDialog.etAltPvc.setText(gelenData.alt_pvc)
+                        viewDialog.etUstPvc.setText(gelenData.ust_pvc)
+                        viewDialog.etFermuar.setText(gelenData.fermuar)
+                        viewDialog.etBoruYeri.setText(gelenData.boru_yeri)
+                        viewDialog.etEksSacak.setText(gelenData.ekstra_sacak)
+                        viewDialog.etSiparisNotuSeffaf.setText(itemData.siparis_notu)
+                    }
+                })
+                builder.setView(viewDialog)
+                var dialogSiparisTuru: Dialog = builder.create()
+                dialogSiparisTuru.show()
+            }
         }
         holder.itemView.setOnLongClickListener {
             val popup = PopupMenu(myContext, holder.itemView)
@@ -153,7 +268,6 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                                             }
                                         })
                                     }
-
                                     if (itemData.siparis_turu == "Körüklü Tente") {
                                         siparisRef.child(itemData.siparis_key.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
                                             override fun onCancelled(p0: DatabaseError) {}
@@ -172,6 +286,79 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                                             }
                                         })
                                     }
+                                    if (itemData.siparis_turu == "Pergole") {
+                                        siparisRef.child(itemData.siparis_key.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onCancelled(p0: DatabaseError) {}
+                                            override fun onDataChange(p0: DataSnapshot) {
+                                                var data = p0.getValue(SiparisData::class.java)!!
+                                                var tenteData = p0.child("tenteData").getValue(SiparisData.PergoleData::class.java)!!
+
+                                                ref.child("Teklifler").child(itemData.siparis_key.toString()).setValue(data).addOnCompleteListener {
+                                                    ref.child("Teklifler").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData)
+                                                    siparisRef.child(itemData.siparis_key.toString()).removeValue()
+                                                    Toast.makeText(myContext, "Teklif Girildi", Toast.LENGTH_LONG).show()
+
+
+                                                }
+
+                                            }
+                                        })
+                                    }
+                                    if (itemData.siparis_turu == "Şemsiye") {
+                                        siparisRef.child(itemData.siparis_key.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onCancelled(p0: DatabaseError) {}
+                                            override fun onDataChange(p0: DataSnapshot) {
+                                                var data = p0.getValue(SiparisData::class.java)!!
+                                                var tenteData = p0.child("tenteData").getValue(SiparisData.SemsiyeData::class.java)!!
+
+                                                ref.child("Teklifler").child(itemData.siparis_key.toString()).setValue(data).addOnCompleteListener {
+                                                    ref.child("Teklifler").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData)
+                                                    siparisRef.child(itemData.siparis_key.toString()).removeValue()
+                                                    Toast.makeText(myContext, "Teklif Girildi", Toast.LENGTH_LONG).show()
+
+
+                                                }
+
+                                            }
+                                        })
+                                    }
+                                    if (itemData.siparis_turu == "Karpuz Tente") {
+                                        siparisRef.child(itemData.siparis_key.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onCancelled(p0: DatabaseError) {}
+                                            override fun onDataChange(p0: DataSnapshot) {
+                                                var data = p0.getValue(SiparisData::class.java)!!
+                                                var tenteData = p0.child("tenteData").getValue(SiparisData.KarpuzData::class.java)!!
+
+                                                ref.child("Teklifler").child(itemData.siparis_key.toString()).setValue(data).addOnCompleteListener {
+                                                    ref.child("Teklifler").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData)
+                                                    siparisRef.child(itemData.siparis_key.toString()).removeValue()
+                                                    Toast.makeText(myContext, "Teklif Girildi", Toast.LENGTH_LONG).show()
+
+
+                                                }
+
+                                            }
+                                        })
+                                    }
+                                    if (itemData.siparis_turu == "Şeffaf") {
+                                        siparisRef.child(itemData.siparis_key.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onCancelled(p0: DatabaseError) {}
+                                            override fun onDataChange(p0: DataSnapshot) {
+                                                var data = p0.getValue(SiparisData::class.java)!!
+                                                var tenteData = p0.child("tenteData").getValue(SiparisData.SeffafData::class.java)!!
+
+                                                ref.child("Teklifler").child(itemData.siparis_key.toString()).setValue(data).addOnCompleteListener {
+                                                    ref.child("Teklifler").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData)
+                                                    siparisRef.child(itemData.siparis_key.toString()).removeValue()
+                                                    Toast.makeText(myContext, "Teklif Girildi", Toast.LENGTH_LONG).show()
+
+
+                                                }
+
+                                            }
+                                        })
+                                    }
+
 
 
                                 }
@@ -265,8 +452,6 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
                                     dialog!!.dismiss()
                                 }
-
-
                             })
                             builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
@@ -285,10 +470,239 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                                     siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
                                     myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                }
+                            })
+
+
+                            builder.setView(viewDialog)
+                            var dialogSiparisTuru: Dialog = builder.create()
+                            dialogSiparisTuru.show()
+                        }
+                        if (itemData.siparis_turu == "Pergole") {
+                            var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                            var viewDialog = inflate(myContext, R.layout.activity_pergole, null)
+                            viewDialog.imgPergole.visibility = View.GONE
+                            viewDialog.appBarLayoutPergole.visibility = View.GONE
+                            viewDialog.spPergoleTuru.visibility = View.GONE
+                            viewDialog.spPergoleCesidi.visibility = View.GONE
+                            viewDialog.spMotorYonu.visibility = View.GONE
+                            viewDialog.chCamKaydi.visibility = View.GONE
+                            viewDialog.chCamVarMiVar.visibility = View.GONE
+
+
+                            siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    var gelenData = p0.getValue(SiparisData.PergoleData::class.java)!!
+                                    viewDialog.etPergoleTuru.setText(gelenData.pergole_turu)
+                                    viewDialog.etCephePergole.setText(gelenData.cephe)
+                                    viewDialog.etArkaYukseklik.setText(gelenData.arka_yukseklik)
+                                    viewDialog.etOnYukseklik.setText(gelenData.on_yukseklik)
+                                    viewDialog.etAcilimPergole.setText(gelenData.acilim)
+                                    viewDialog.etKumasRengi.setText(gelenData.kumas_rengi)
+                                    viewDialog.etProfilRengiPergole.setText(gelenData.profil_rengi)
+                                    viewDialog.etLed.setText(gelenData.led)
+                                    viewDialog.etMotorYonu.setText(gelenData.motor_yonu)
+                                    viewDialog.etCamKaydi.setText(gelenData.cam_kaydi_olcusu)
+                                    viewDialog.etCamVarmi.setText(gelenData.etrafinda_cam_varmi)
+                                    viewDialog.etPergoleCesidi.setText(gelenData.pergole_cesidi)
+                                    viewDialog.etSiparisNotuPergole.setText(itemData.siparis_notu)
+                                }
+                            })
+
+                            builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    dialog!!.dismiss()
+                                }
+
+
+                            })
+                            builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
+                                    var pergoleTuru = viewDialog.etPergoleTuru.text.toString()
+                                    var cephe = viewDialog.etCephePergole.text.toString()
+                                    var arka = viewDialog.etArkaYukseklik.text.toString()
+                                    var on = viewDialog.etOnYukseklik.text.toString()
+                                    var acilim = viewDialog.etAcilimPergole.text.toString()
+                                    var kumasRengi = viewDialog.etKumasRengi.text.toString()
+                                    var profilRengi = viewDialog.etProfilRengiPergole.text.toString()
+                                    var led = viewDialog.etLed.text.toString()
+                                    var motorYonu = viewDialog.etMotorYonu.text.toString()
+                                    var camKaydiOlcusu = viewDialog.etCamKaydi.text.toString()
+                                    var pergoleCesidi = viewDialog.etPergoleCesidi.text.toString()
+                                    var etrafindaCamVar = viewDialog.etCamVarmi.text.toString()
+
+
+                                    var siparisNot = viewDialog.etSiparisNotuPergole.text.toString()
+                                    var guncelData = SiparisData.PergoleData(pergoleTuru, cephe, acilim, arka, on, kumasRengi, profilRengi,
+                                        led, motorYonu, camKaydiOlcusu, pergoleCesidi, etrafindaCamVar, itemData.siparis_key.toString())
+                                    siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
+                                    siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
                                 }
 
                             })
+                            builder.setView(viewDialog)
+                            var dialogSiparisTuru: Dialog = builder.create()
+                            dialogSiparisTuru.show()
+                        }
+                        if (itemData.siparis_turu == "Şemsiye") {
+                            var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                            var viewDialog = inflate(myContext, R.layout.activity_semsiye, null)
+                            //   viewDialog.imgSemsiye.visibility = View.GONE
+                            viewDialog.appBarLayoutSemsiye.visibility = View.GONE
+                            viewDialog.spSemsiyeTuru.visibility = View.GONE
+
+
+                            siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    var gelenData = p0.getValue(SiparisData.SemsiyeData::class.java)!!
+                                    viewDialog.etSemsiyeTuru.setText(gelenData.semsiye_turu)
+                                    viewDialog.etGenislikSemsiye.setText(gelenData.genislik)
+                                    viewDialog.etKumasRengiSemsiye.setText(gelenData.kumas_rengi)
+                                    viewDialog.etSacakYazisiSemsiye.setText(gelenData.sacak_yazisi)
+                                    viewDialog.etSiparisNotuSemsiye.setText(itemData.siparis_notu)
+                                }
+                            })
+
+                            builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    dialog!!.dismiss()
+                                }
+
+
+                            })
+                            builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
+                                    var semsiyeTuru = viewDialog.etSemsiyeTuru.text.toString()
+                                    var genislik = viewDialog.etGenislikSemsiye.text.toString()
+                                    var kumasRengi = viewDialog.etKumasRengiSemsiye.text.toString()
+                                    var sacakYazisi = viewDialog.etSacakYazisiSemsiye.text.toString()
+                                    var siparisNot = viewDialog.etSiparisNotuSemsiye.text.toString()
+
+                                    var guncelData = SiparisData.SemsiyeData(semsiyeTuru,genislik,kumasRengi,sacakYazisi,itemData.siparis_key.toString())
+                                    siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
+                                    siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+                                }
+
+                            })
+
+
+                            builder.setView(viewDialog)
+                            var dialogSiparisTuru: Dialog = builder.create()
+                            dialogSiparisTuru.show()
+                        }
+                        if (itemData.siparis_turu == "Karpuz Tente") {
+                            var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                            var viewDialog = inflate(myContext, R.layout.activity_karpuz_tente, null)
+                            //   viewDialog.imgSemsiye.visibility = View.GONE
+                            viewDialog.appBarLayoutKarpuz.visibility = View.GONE
+                            viewDialog.spSacakTuruKarpuz.visibility = View.GONE
+
+
+                            siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    var gelenData = p0.getValue(SiparisData.KarpuzData::class.java)!!
+                                    viewDialog.etGenislikKarpuz.setText(gelenData.genislik)
+                                    viewDialog.etYukseklikKarpuz.setText(gelenData.yukseklik)
+                                    viewDialog.etKumasRengiKarpuz.setText(gelenData.kumas_rengi)
+                                    viewDialog.etSacakTürüKarpuz.setText(gelenData.sacak_turu)
+                                    viewDialog.etSacakYazisiKarpuz.setText(gelenData.sacak_yazisi)
+                                    viewDialog.etBiyeRengiKarpuz.setText(gelenData.biye_rengi)
+                                    viewDialog.etSeritRengiKarpuz.setText(gelenData.serit_rengi)
+                                    viewDialog.etSiparisNotuKarpuz.setText(itemData.siparis_notu)
+                                }
+                            })
+
+
+                            builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    dialog!!.dismiss()
+                                }
+                            })
+                            builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
+
+
+                                    var genislik = viewDialog.etGenislikKarpuz.text.toString()
+                                    var yukseklik = viewDialog.etYukseklikKarpuz.text.toString()
+                                    var kumasRengi = viewDialog.etKumasRengiKarpuz.text.toString()
+                                    var sacakTuru = viewDialog.etSacakTürüKarpuz.text.toString()
+                                    var sacakBiyesiRengi = viewDialog.etBiyeRengiKarpuz.text.toString()
+                                    var seritRengi = viewDialog.etSeritRengiKarpuz.text.toString()
+                                    var sacakYazisi = viewDialog.etSacakYazisiKarpuz.text.toString()
+                                    var siparisNot = viewDialog.etSiparisNotuKarpuz.text.toString()
+
+                                    var guncelData = SiparisData.KarpuzData(genislik,yukseklik,kumasRengi,sacakTuru,sacakYazisi,sacakBiyesiRengi,seritRengi, itemData.siparis_key.toString())
+                                    siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
+                                    siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                }
+                            })
+
+                            builder.setView(viewDialog)
+                            var dialogSiparisTuru: Dialog = builder.create()
+                            dialogSiparisTuru.show()
+                        }
+                        if (itemData.siparis_turu == "Şeffaf") {
+                            var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                            var viewDialog = inflate(myContext, R.layout.activity_seffaf_tente, null)
+                            //   viewDialog.imgSemsiye.visibility = View.GONE
+                            viewDialog.appBarLayoutSeffaf.visibility = View.GONE
+                            viewDialog.spFermuar.visibility = View.GONE
+                            viewDialog.spBoruYeri.visibility = View.GONE
+
+
+                            siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    var gelenData = p0.getValue(SiparisData.SeffafData::class.java)!!
+                                    viewDialog.etMikaEni.setText(gelenData.seffaf_mika_eni)
+                                    viewDialog.etPVCRengi.setText(gelenData.pvc_rengi)
+                                    viewDialog.etAltPvc.setText(gelenData.alt_pvc)
+                                    viewDialog.etUstPvc.setText(gelenData.ust_pvc)
+                                    viewDialog.etFermuar.setText(gelenData.fermuar)
+                                    viewDialog.etBoruYeri.setText(gelenData.boru_yeri)
+                                    viewDialog.etEksSacak.setText(gelenData.ekstra_sacak)
+                                    viewDialog.etSiparisNotuSeffaf.setText(itemData.siparis_notu)
+                                }
+                            })
+
+                            builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    dialog!!.dismiss()
+                                }
+                            })
+                            builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
+                                    var mika = viewDialog.etMikaEni.text.toString()
+                                    var pvcRengi = viewDialog.etPVCRengi.text.toString()
+                                    var altPvc = viewDialog.etAltPvc.text.toString()
+                                    var ustPvc = viewDialog.etUstPvc.text.toString()
+                                    var fermuar = viewDialog.etFermuar.text.toString()
+                                    var boruyeri = viewDialog.etBoruYeri.text.toString()
+                                    var eksSacak = viewDialog.etEksSacak.text.toString()
+
+                                    var siparisNot = viewDialog.etSiparisNotuSeffaf.text.toString()
+
+                                    var guncelData = SiparisData.SeffafData(mika,pvcRengi,altPvc,ustPvc,fermuar,boruyeri,eksSacak, itemData.siparis_key.toString())
+
+                                    siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
+                                    siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                }
+                            })
+
+
                             builder.setView(viewDialog)
                             var dialogSiparisTuru: Dialog = builder.create()
                             dialogSiparisTuru.show()

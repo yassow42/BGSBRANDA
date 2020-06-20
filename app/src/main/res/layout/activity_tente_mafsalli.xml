@@ -57,9 +57,11 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -67,7 +69,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,15 +87,17 @@
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -110,15 +115,17 @@
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -136,15 +143,17 @@
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -161,21 +170,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:spinnerMode="dialog" />
+
             <EditText
                 android:id="@+id/etSacakTuruMafsalli"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -193,15 +205,17 @@
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -218,21 +232,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:spinnerMode="dialog" />
+
             <EditText
                 android:id="@+id/etSanziman"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -250,16 +267,18 @@
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
         </TableRow>
 
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
 
@@ -277,9 +296,10 @@
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/bg_edittext"
-                android:ems="10"
+                android:ems="7"
                 android:inputType="textPersonName"
-                android:textColor="@color/siyah"
+                android:paddingLeft="12dp"
+                android:textColor="@color/beyaz"
                 android:textStyle="bold" />
 
 

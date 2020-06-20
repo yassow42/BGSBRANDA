@@ -1,6 +1,7 @@
 package com.creativeoffice.bgsbranda.Activity
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -26,6 +27,7 @@ class SiparislerActivity : AppCompatActivity() {
     var siparislerList = ArrayList<SiparisData>()
     val ref = FirebaseDatabase.getInstance().reference
     lateinit var mAuth: FirebaseAuth
+    lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     lateinit var userID: String
 
     var loading: Dialog? = null
@@ -36,6 +38,7 @@ class SiparislerActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        initMyAuthStateListener()
 
         dialogCalistir()
         Handler().postDelayed({ setupVeri() }, 1500)
@@ -55,6 +58,9 @@ class SiparislerActivity : AppCompatActivity() {
 
     private fun setupVeri() {
 
+        imgBack.setOnClickListener {
+            mAuth.signOut()
+        }
 
         ref.child("Siparisler").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -93,6 +99,18 @@ class SiparislerActivity : AppCompatActivity() {
         var menu: Menu = bottomNav.menu
         var menuItem = menu.getItem(ACTIVITY_NO)
         menuItem.setChecked(true)
+    }
+
+    private fun initMyAuthStateListener() {
+        mAuthListener = object : FirebaseAuth.AuthStateListener {
+            override fun onAuthStateChanged(p0: FirebaseAuth) {
+                val kullaniciGirisi = p0.currentUser
+                if (kullaniciGirisi != null) { //eğer kişi giriş yaptıysa nul gorunmez. giriş yapmadıysa null olur
+                } else {
+                    startActivity(Intent(this@SiparislerActivity, LoginActivity::class.java))
+                }
+            }
+        }
     }
 
 }

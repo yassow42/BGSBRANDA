@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import kotlinx.android.synthetic.main.activity_pergole.*
-import kotlinx.android.synthetic.main.activity_pergole.etSiparisNotu
 import kotlinx.android.synthetic.main.activity_pergole.tvSiparisEkle
 
 class PergoleActivity : AppCompatActivity() {
@@ -42,7 +41,7 @@ class PergoleActivity : AppCompatActivity() {
 
     private fun siparisEkle(musteriKey: String?) {
         tvSiparisEkle.setOnClickListener {
-            var siparisNotu = etSiparisNotu.text.toString()
+            var siparisNotu = etSiparisNotuPergole.text.toString()
             var siparisKey = ref.child("Siparisler").push().key.toString()
             var siparisTuru = "Pergole"
             var siparisData = SiparisData(siparisNotu, siparisTuru, 0, siparisKey, musteriKey, userID, null, null, null, null, null, null, null, null, null)
