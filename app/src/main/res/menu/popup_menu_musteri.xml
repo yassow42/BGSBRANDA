@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/popDüzenle"
+        android:id="@+id/popDüzenleMusteri"
         android:title="Düzenle" />
     <item
-        android:id="@+id/popSil"
+        android:id="@+id/popSilMusteri"
         android:title="Sil" />
 </menu>

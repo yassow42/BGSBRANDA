@@ -57,10 +57,13 @@ class PergoleActivity : AppCompatActivity() {
                 val kumasRengi = etKumasRengi.text.toString()
                 val profilRengi = etProfilRengiPergole.text.toString()
                 val led = etLed.text.toString()
+                val kornerDirekOlcusu = etKornerDirekOlcu.text.toString()
+                val kornerDirekAdet = etKornerDirekAdet.text.toString()
                 val camkaydiOlcusu = etCamKaydi.text.toString()
+                val camkaydiAdet = etCamKaydiAdet.text.toString()
 
-
-                var tenteData = SiparisData.PergoleData(pergoleTuru,cephe, acilim,arkaYukseklik,onYukseklik, kumasRengi, profilRengi, led,motorYonu,camkaydiOlcusu, pergoleCesidi,etrafindaCamVarmi,siparisKey)
+                var tenteData = SiparisData.PergoleData(pergoleTuru,cephe, acilim,arkaYukseklik,onYukseklik, kumasRengi, profilRengi, led,motorYonu,kornerDirekOlcusu,kornerDirekAdet,
+                    camkaydiOlcusu,camkaydiAdet, pergoleCesidi,etrafindaCamVarmi,siparisKey)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -95,14 +98,35 @@ class PergoleActivity : AppCompatActivity() {
         }
 
 
+        etKornerDirekOlcu.visibility=View.GONE
+        etKornerDirekAdet.visibility=View.GONE
+        chKornerDirek.setOnClickListener {
+            if (chKornerDirek.isChecked) {
+                etKornerDirekOlcu.visibility = View.VISIBLE
+                etKornerDirekAdet.visibility=View.VISIBLE
+
+            } else {
+                etKornerDirekOlcu.visibility = View.GONE
+                etKornerDirekAdet.visibility=View.GONE
+
+            }
+        }
+
         etCamKaydi.visibility=View.GONE
+        etCamKaydiAdet.visibility=View.GONE
         chCamKaydi.setOnClickListener {
             if (chCamKaydi.isChecked) {
                 etCamKaydi.visibility = View.VISIBLE
+                etCamKaydiAdet.visibility=View.VISIBLE
+
             } else {
                 etCamKaydi.visibility = View.GONE
+                etCamKaydiAdet.visibility=View.GONE
+
             }
         }
+
+
 
         etCamVarmi.visibility=View.GONE
         chCamVarMiVar.setOnClickListener {

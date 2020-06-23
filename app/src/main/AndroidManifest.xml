@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SiparisTurleriActivity.SeffafTenteActivity"></activity>
+        <activity android:name=".SiparisTurleriActivity.WintentActivity"></activity>
+        <activity android:name=".SiparisTurleriActivity.SeffafTenteActivity" />
         <activity android:name=".SiparisTurleriActivity.KarpuzTenteActivity" />
         <activity android:name=".SiparisTurleriActivity.SemsiyeActivity" />
         <activity android:name=".SiparisTurleriActivity.PergoleActivity" />
@@ -22,7 +23,7 @@
         <activity android:name=".SiparisTurleriActivity.MafsalliTenteActivity" />
         <activity android:name=".Activity.MusterilerActivity" />
         <activity android:name=".Activity.SiparislerActivity" />
-        <activity android:name=".Activity.LoginActivity"/>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

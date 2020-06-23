@@ -13,17 +13,10 @@ import com.creativeoffice.bgsbranda.Datalar.SiparisData
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_koruklu_tente.*
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.*
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.etAcilim
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.etCephe
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.etKumasKodu
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.etProfilRengi
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.etSacakYazisi
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.etSiparisNotu
-import kotlinx.android.synthetic.main.activity_tente_mafsalli.tvSiparisEkle
+import kotlinx.android.synthetic.main.activity_wintent.*
 
-class MafsalliTenteActivity : AppCompatActivity() {
+class WintentActivity : AppCompatActivity() {
+
     val ref = FirebaseDatabase.getInstance().reference
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
@@ -36,7 +29,7 @@ class MafsalliTenteActivity : AppCompatActivity() {
     var mantolamaVar = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tente_mafsalli)
+        setContentView(R.layout.activity_wintent)
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
@@ -49,10 +42,10 @@ class MafsalliTenteActivity : AppCompatActivity() {
     }
 
     private fun spinnerAyarlari() {
-        etSacakTuruMafsalli.visibility = View.GONE
+        etSacakTuruWintend.visibility = View.GONE
         var sacakturlerı = arrayOf("Düz", "Dalgalı")
-        spSacakTuruMafsalli.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sacakturlerı)
-        spSacakTuruMafsalli.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spSacakTuruWintend.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sacakturlerı)
+        spSacakTuruWintend.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 sacakTuru = "Düz"
             }
@@ -63,10 +56,10 @@ class MafsalliTenteActivity : AppCompatActivity() {
 
         }
 
-        etSanziman.visibility = View.GONE
+        etSanzimanWintend.visibility = View.GONE
         var sanzımanYonleri = arrayOf("Sağ", "Sol")
-        spSanzimanYonuMafsalli.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, sanzımanYonleri)
-        spSanzimanYonuMafsalli.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spSanzimanYonuWintend.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, sanzımanYonleri)
+        spSanzimanYonuWintend.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 sanzimanYonu = "Sağ"
 
@@ -77,10 +70,10 @@ class MafsalliTenteActivity : AppCompatActivity() {
             }
         }
 
-        etAyakTuruMafsalli.visibility = View.GONE
+        etAyakTuruWintend.visibility = View.GONE
         var ayakTurleri = arrayOf("Duvar", "Tavan", "Özel")
-        spAyakYonuMafsalli.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ayakTurleri)
-        spAyakYonuMafsalli.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spAyakTuruWintend.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ayakTurleri)
+        spAyakTuruWintend.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 ayakTuru = "Duvar"
             }
@@ -91,10 +84,10 @@ class MafsalliTenteActivity : AppCompatActivity() {
 
         }
 
-        etMotor.visibility = View.GONE
+        etMotorWintend.visibility = View.GONE
         var motorVar = arrayOf("Yok", "Var")
-        spMotorMafsalli.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, motorVar)
-        spMotorMafsalli.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spMotorWintend.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, motorVar)
+        spMotorWintend.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 motorVarMi = "Yok"
             }
@@ -104,10 +97,10 @@ class MafsalliTenteActivity : AppCompatActivity() {
             }
 
         }
-        etMantolamaMafsalli.visibility = View.GONE
+        etMantolamaWintend.visibility = View.GONE
         var mantolama = arrayOf("Var", "Yok")
-        spMantolamaMafsalli.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mantolama)
-        spMantolamaMafsalli.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spMantolamaWintend.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mantolama)
+        spMantolamaWintend.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 mantolamaVar = "Yok"
             }
@@ -121,11 +114,11 @@ class MafsalliTenteActivity : AppCompatActivity() {
     }
 
     private fun siparisEkle(musteriKey: String?) {
-        tvSiparisEkle.setOnClickListener {
+        tvSiparisEkleWintend.setOnClickListener {
 
-            var siparisNotu = etSiparisNotu.text.toString()
+            var siparisNotu = etSiparisNotuWintend.text.toString()
             var siparisKey = ref.child("Siparisler").push().key.toString()
-            var siparisTuru = "Mafsallı Tente"
+            var siparisTuru = "Wintend"
             var siparisData = SiparisData(
                 siparisNotu, siparisTuru, 0, siparisKey, musteriKey, userID, null,
                 null, null, null, null, null,
@@ -135,13 +128,13 @@ class MafsalliTenteActivity : AppCompatActivity() {
 
             ref.child("Siparisler").child(siparisKey).setValue(siparisData).addOnCompleteListener {
                 ref.child("Siparisler").child(siparisKey).child("siparis_girme_zamani").setValue(ServerValue.TIMESTAMP)
-                val cephe = etCephe.text.toString()
-                val acilim = etAcilim.text.toString()
-                val kumasKodu = etKumasKodu.text.toString()
-                val sacakYazisi = etSacakYazisi.text.toString()
+                val cephe = etCepheWintend.text.toString()
+                val kolBoyu = etKolBoyuWintend.text.toString()
+                val kumasKodu = etKumasKoduWintend.text.toString()
+                val sacakYazisi = etSacakYazisiWintend.text.toString()
 
-                val profilRengi = etProfilRengi.text.toString()
-                var tenteData = SiparisData.MafsallıTente(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, motorVarMi, sanzimanYonu, ayakTuru, mantolamaVar, profilRengi, siparisKey)
+                val profilRengi = etProfilRengiWintend.text.toString()
+                var tenteData = SiparisData.Wintend(cephe, kolBoyu, kumasKodu, sacakTuru, sacakYazisi, motorVarMi, sanzimanYonu, ayakTuru, mantolamaVar, profilRengi, siparisKey)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

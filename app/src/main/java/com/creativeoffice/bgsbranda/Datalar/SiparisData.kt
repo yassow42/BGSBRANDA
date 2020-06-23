@@ -61,7 +61,10 @@ class SiparisData {
         var kumaskodu: String? = null,
         var sacak_turu: String? = null,
         var sacak_yazisi: String? = null,
+        var motor: String? = null,
         var sanzimanYonu: String? = null,
+        var ayakTuru: String?=null,
+        var mantolama: String?=null,
         var profilRengi: String? = null,
         var siparis_key: String? = null
     ) {
@@ -74,10 +77,12 @@ class SiparisData {
         var kumaskodu: String? = null,
         var sacak_turu: String? = null,
         var sacak_biyesi_rengi:String?=null,
+        var serit_rengi:String?=null,
         var serit_rengi_adeti:String?=null,
         var tente_sacak_yazisi: String? = null,
         var ipYonu: String? = null,
         var profilRengi: String? = null,
+        var ayakTuru:String?=null,
         var siparis_key: String? = null
     ) {
 
@@ -94,7 +99,10 @@ class SiparisData {
         var profil_rengi: String? = null,
         var led: String? = null,
         var motor_yonu: String? = null,
+        var korner_direk_olcusu: String? = null,
+        var korner_direk_adeti: String? = null,
         var cam_kaydi_olcusu: String? = null,
+        var cam_kaydi_adeti: String? = null,
         var pergole_cesidi: String? = null,
         var etrafinda_cam_varmi: String? = null,
         var siparis_key: String? = null
@@ -146,6 +154,24 @@ class SiparisData {
 
     ) {
 
+
+    }
+
+
+
+    data class Wintend(
+        var cephe: String? = null,
+        var kolboyu: String? = null,
+        var kumaskodu: String? = null,
+        var sacak_turu: String? = null,
+        var sacak_yazisi: String? = null,
+        var motor: String? = null,
+        var sanzimanYonu: String? = null,
+        var ayakTuru: String?=null,
+        var mantolama: String?=null,
+        var profilRengi: String? = null,
+        var siparis_key: String? = null
+    ) {
 
     }
 

@@ -49,7 +49,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etCephe"
+                        android:id="@+id/etCepheWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -70,14 +70,14 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Açılım"
+                        android:text="Kol Boyu"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/siyah"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etAcilim"
+                        android:id="@+id/etKolBoyuWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -105,7 +105,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etKumasKodu"
+                        android:id="@+id/etKumasKoduWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -133,13 +133,13 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spSacakTuruMafsalli"
+                        android:id="@+id/spSacakTuruWintend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:spinnerMode="dialog" />
 
                     <EditText
-                        android:id="@+id/etSacakTuruMafsalli"
+                        android:id="@+id/etSacakTuruWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -167,7 +167,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etSacakYazisi"
+                        android:id="@+id/etSacakYazisiWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -195,13 +195,13 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spMotorMafsalli"
+                        android:id="@+id/spMotorWintend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:spinnerMode="dialog" />
 
                     <EditText
-                        android:id="@+id/etMotor"
+                        android:id="@+id/etMotorWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -228,13 +228,13 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spSanzimanYonuMafsalli"
+                        android:id="@+id/spSanzimanYonuWintend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:spinnerMode="dialog" />
 
                     <EditText
-                        android:id="@+id/etSanziman"
+                        android:id="@+id/etSanzimanWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -262,12 +262,12 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spAyakYonuMafsalli"
+                        android:id="@+id/spAyakTuruWintend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
                     <EditText
-                        android:id="@+id/etAyakTuruMafsalli"
+                        android:id="@+id/etAyakTuruWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -295,12 +295,12 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spMantolamaMafsalli"
+                        android:id="@+id/spMantolamaWintend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
                     <EditText
-                        android:id="@+id/etMantolamaMafsalli"
+                        android:id="@+id/etMantolamaWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -328,7 +328,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etProfilRengi"
+                        android:id="@+id/etProfilRengiWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -357,7 +357,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etSiparisNotu"
+                        android:id="@+id/etSiparisNotuWintend"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="3dp"
@@ -375,7 +375,7 @@
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLayoutMafsalli"
+        android:id="@+id/appBarLayoutWintend"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@color/colorPrimary"
@@ -384,7 +384,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvSiparisEkle"
+            android:id="@+id/tvSiparisEkleWintend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -403,7 +403,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Mafsallı Tente"
+            android:text="Wintend Tente"
             android:textAlignment="center"
             android:textColor="@color/beyaz"
             android:textSize="18sp"

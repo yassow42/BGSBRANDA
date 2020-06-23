@@ -3,17 +3,531 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgPergole"
-        android:layout_width="wrap_content"
-        android:layout_height="170dp"
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPergole"
-        app:srcCompat="@drawable/kis_bahcesi" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPergole">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgPergole"
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                app:srcCompat="@drawable/kis_bahcesi" />
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pergole Türü"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spPergoleTuru"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/etPergoleTuru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cephe"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etCephePergole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Açılım"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etAcilimPergole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arka Yükseklik"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etArkaYukseklik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ön Yükseklik"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etOnYukseklik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kumaş Rengi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etKumasRengi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profil Rengi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etProfilRengiPergole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Led"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etLed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Motor Yönü"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spMotorYonu"
+                        android:layout_height="50dp"
+                        android:padding="6dp"
+                        android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/etMotorYonu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Korner Direk"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/chKornerDirek"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:padding="6dp"
+                        android:text="Var mı ?" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/etKornerDirekOlcu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:hint="Ölçü"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textColorHint="@color/beyaz"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etKornerDirekAdet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:hint="Adet"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textColorHint="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cam Kaydı"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/chCamKaydi"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:padding="6dp"
+                        android:text="Var mı ?" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/etCamKaydi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:hint="Ölçü"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textColorHint="@color/beyaz"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etCamKaydiAdet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:hint="Adet"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textColorHint="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Etrafında Cam"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/chCamVarMiVar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:padding="6dp"
+                        android:text="Var mı ?" />
+
+                    <EditText
+                        android:id="@+id/etCamVarmi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textColorHint="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pergole Çeşidi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spPergoleCesidi"
+                        android:layout_height="50dp"
+                        android:padding="6dp"
+                        android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/etPergoleCesidi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sipariş Notu"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSiparisNotuPergole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="5"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayoutPergole"
@@ -52,426 +566,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPergole">
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pergöle Türü"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spPergoleTuru"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dialog" />
-
-            <EditText
-                android:id="@+id/etPergoleTuru"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cephe"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/etCephePergole"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Arka Yükseklik"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/etArkaYukseklik"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ön Yükseklik"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/etOnYukseklik"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Açılım"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etAcilimPergole"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kumaş Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etKumasRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profil Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etProfilRengiPergole"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Led"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etLed"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Motor Yönü"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spMotorYonu"
-                android:layout_height="50dp"
-                android:padding="6dp"
-                android:spinnerMode="dialog" />
-
-            <EditText
-                android:id="@+id/etMotorYonu"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cam Kaydı"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/chCamKaydi"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="6dp"
-                android:text="Var mı ?" />
-
-            <EditText
-                android:id="@+id/etCamKaydi"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:hint="Ölçüsü ? "
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textColorHint="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Etrafında Cam"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/chCamVarMiVar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="6dp"
-                android:text="Var mı ?" />
-
-            <EditText
-                android:id="@+id/etCamVarmi"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textColorHint="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pergole Çeşidi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spPergoleCesidi"
-                android:layout_height="50dp"
-                android:padding="6dp"
-                android:spinnerMode="dialog" />
-
-            <EditText
-                android:id="@+id/etPergoleCesidi"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sipariş Notu"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etSiparisNotuPergole"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="5"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-
-        </TableRow>
-    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

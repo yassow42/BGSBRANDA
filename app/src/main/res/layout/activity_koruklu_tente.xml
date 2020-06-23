@@ -5,336 +5,412 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imgKoruklu"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutKoruklu"
-        app:srcCompat="@drawable/koruklu_tente" />
-
-    <TableLayout
-        android:id="@+id/tableLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgKoruklu">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutKoruklu">
 
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
+            <ImageView
+                android:id="@+id/imgKoruklu"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cephe"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="175dp"
+                app:srcCompat="@drawable/koruklu_tente" />
 
-
-            <EditText
-                android:id="@+id/etCephe"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Açılım"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etAcilim"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kumaş Kodu"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etKumasKodu"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saçak Türü"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spSacakTuruKoruk"
+            <TableLayout
+                android:id="@+id/tableLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dialog" />
-
-            <EditText
-                android:id="@+id/etSacakTuruKoruklu"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saçak Biyesi Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="8dp">
 
 
-            <EditText
-                android:id="@+id/etSacakBiyesRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:id="@+id/tvSeritRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Şerit Rengi Adeti"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/chSeritRengiVarMi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="Var Mı ? "
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:typeface="monospace" />
-
-            <EditText
-                android:id="@+id/etSeritRengiAdeti"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:hint="Adet"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textColorHint="@color/beyaz"
-                android:textStyle="bold"
-                android:visibility="visible" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cephe"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
 
-        </TableRow>
+                    <EditText
+                        android:id="@+id/etCephe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
 
-            <TextView
+                </TableRow>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saçak Yazısı"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-            <EditText
-                android:id="@+id/etSacakYazisi"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
+                    <TextView
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Açılım"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <TextView
+                    <EditText
+                        android:id="@+id/etAcilim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="İp Yönü"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-            <EditText
-                android:id="@+id/etİpYonu"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
+                    <TextView
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kumaş Kodu"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <TextView
+                    <EditText
+                        android:id="@+id/etKumasKodu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profil Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-            <EditText
-                android:id="@+id/etProfilRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:text="Siyah"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
+                    <TextView
 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saçak Türü"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+                    <Spinner
+                        android:id="@+id/spSacakTuruKoruk"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:spinnerMode="dialog" />
 
-            <TextView
+                    <EditText
+                        android:id="@+id/etSacakTuruKoruklu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sipariş Notu"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-            <EditText
-                android:id="@+id/etSiparisNotu"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saçak Biyesi Rengi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
 
-        </TableRow>
-    </TableLayout>
+                    <EditText
+                        android:id="@+id/etSacakBiyesRengi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Şerit Rengi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etSeritRengi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:id="@+id/tvSeritRengi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kasa"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/chSeritRengiVarMi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Var Mı ? "
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
+
+                    <EditText
+                        android:id="@+id/etSeritRengiAdeti"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:hint="Adet"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textColorHint="@color/beyaz"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saçak Yazısı"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSacakYazisi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="İp Yönü"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spIpYonu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/etIpYonu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ayak Türü"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spAyakYonu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/etAyakTuru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profil Rengi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etProfilRengi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:text="Siyah"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sipariş Notu"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSiparisNotu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayoutKoruklu"

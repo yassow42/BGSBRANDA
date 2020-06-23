@@ -22,6 +22,8 @@ class KorukluTenteActivity : AppCompatActivity() {
     lateinit var userID: String
     var sacakTuru = ""
     var seritRengiAdeti = "Yok"
+    var ipYonu = ""
+    var ayakTuru = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +59,36 @@ class KorukluTenteActivity : AppCompatActivity() {
                 etSeritRengiAdeti.visibility = View.VISIBLE
             } else {
                 etSeritRengiAdeti.visibility = View.GONE
+                etSeritRengiAdeti.text.clear()
             }
+        }
+
+        etIpYonu.visibility = View.GONE
+        var ipYonleri = arrayOf("Sağ", "Sol")
+        spIpYonu.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ipYonleri)
+        spIpYonu.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                ipYonu = "Sağ"
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                ipYonu = ipYonleri[position]
+            }
+
+        }
+
+        etAyakTuru.visibility = View.GONE
+        var ayakTurleri = arrayOf("Duvar", "Tavan", "Özel")
+        spAyakYonu.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, ayakTurleri)
+        spAyakYonu.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                ayakTuru = "Duvar"
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                ayakTuru = ayakTurleri[position]
+            }
+
         }
 
 
@@ -83,15 +114,15 @@ class KorukluTenteActivity : AppCompatActivity() {
                 val kumasKodu = etKumasKodu.text.toString()
                 val sacakBiyesiRengi = etSacakBiyesRengi.text.toString()
                 val sacakYazisi = etSacakYazisi.text.toString()
-                val ipYonu = etİpYonu.text.toString()
                 val profilRengi = etProfilRengi.text.toString()
 
-                if (!etSeritRengiAdeti.text.isNullOrEmpty()){
-                    seritRengiAdeti =  etSeritRengiAdeti.text.toString()
+                val seritRengi = etSeritRengi.text.toString()
+                if (!etSeritRengiAdeti.text.isNullOrEmpty()) {
+                    seritRengiAdeti = etSeritRengiAdeti.text.toString()
                 }
 
 
-                var tenteData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakBiyesiRengi, seritRengiAdeti, sacakYazisi, ipYonu, profilRengi, siparisKey)
+                var tenteData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakBiyesiRengi, seritRengi, seritRengiAdeti, sacakYazisi, ipYonu, profilRengi, ayakTuru, siparisKey)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

@@ -69,11 +69,11 @@ class SemsiyeActivity : AppCompatActivity() {
 
     private fun spinnerAyarlari() {
         etSemsiyeTuru.visibility = View.GONE
-        var semsiyeTurleri = arrayOf("Kare", "Yuvarlak")
+        var semsiyeTurleri = arrayOf("Kare Klasik","Kare Profesyonel","Yuvarlak Klasik","Yuvarlak Profesyonel")
         spSemsiyeTuru.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, semsiyeTurleri)
         spSemsiyeTuru.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                semsiyeTuru = "Kare"
+                semsiyeTuru = "Kare Klasik"
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

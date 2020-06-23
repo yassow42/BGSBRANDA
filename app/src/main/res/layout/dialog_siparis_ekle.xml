@@ -91,5 +91,17 @@
             android:textColor="@color/beyaz"
             android:textSize="18sp"
             android:textStyle="bold|italic" />
+        <TextView
+            android:id="@+id/tvWintent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4sp"
+            android:background="@color/colorPrimary"
+            android:padding="4sp"
+            android:text="Wintend"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
