@@ -22,6 +22,8 @@ import com.creativeoffice.bgsbranda.Activity.UretimActivity
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
 import com.creativeoffice.bgsbranda.R
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_diger.view.*
 import kotlinx.android.synthetic.main.activity_karpuz_tente.view.*
 import kotlinx.android.synthetic.main.activity_koruklu_tente.view.*
 import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etAcilim
@@ -33,13 +35,16 @@ import kotlinx.android.synthetic.main.activity_koruklu_tente.view.etSiparisNotu
 import kotlinx.android.synthetic.main.activity_pergole.view.*
 import kotlinx.android.synthetic.main.activity_seffaf_tente.view.*
 import kotlinx.android.synthetic.main.activity_semsiye.view.*
+import kotlinx.android.synthetic.main.activity_tamir.view.*
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.*
 import kotlinx.android.synthetic.main.activity_wintent.view.*
+import kotlinx.android.synthetic.main.dialog_photo.view.*
 
 import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriAdi
 import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriTel
 import kotlinx.android.synthetic.main.item_siparis.view.tvSiparisTuru
 import kotlinx.android.synthetic.main.item_uretim.view.*
+import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,10 +53,11 @@ import kotlin.collections.ArrayList
 class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData>, val kullaniciKey: String) : RecyclerView.Adapter<UretimAdapter.UretimHolder>() {
     val ref = FirebaseDatabase.getInstance().reference
     val uretimRef = FirebaseDatabase.getInstance().reference.child("Uretim")
+    val siparisRef = FirebaseDatabase.getInstance().reference.child("Uretim")
 
     var musteriAdi: String? = null
     var musteriTelNo: String? = null
-
+    var size = 450
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UretimAdapter.UretimHolder {
         val myView = LayoutInflater.from(myContext).inflate(R.layout.item_uretim, parent, false)
 
@@ -68,7 +74,6 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
         holder.setData(uretimler[position])
 
         holder.itemView.setOnClickListener {
-
             if (itemData.siparis_turu == "Mafsallı Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                 var viewDialog = inflate(myContext, R.layout.activity_tente_mafsalli, null)
@@ -79,7 +84,68 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 viewDialog.spMantolamaMafsalli.visibility = View.GONE
                 viewDialog.appBarLayoutMafsalli.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Mafsalli.visibility = View.GONE
+                viewDialog.foto2Mafsalli.visibility = View.GONE
+                viewDialog.foto3Mafsalli.visibility = View.GONE
+                viewDialog.foto4Mafsalli.visibility = View.GONE
+
+                viewDialog.foto1Mafsalli.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Mafsalli.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Mafsalli.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Mafsalli.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Mafsalli)
+                    viewDialog.foto1Mafsalli.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Mafsalli)
+                    viewDialog.foto2Mafsalli.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Mafsalli)
+                    viewDialog.foto3Mafsalli.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Mafsalli)
+                    viewDialog.foto4Mafsalli.visibility = View.VISIBLE
+                }
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.MafsallıTente::class.java)!!
@@ -97,12 +163,12 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                     }
                 })
 
-
                 builder.setView(viewDialog)
                 var dialogSiparisTuru: Dialog = builder.create()
                 dialogSiparisTuru.show()
             }
             if (itemData.siparis_turu == "Körüklü Tente") {
+
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                 var viewDialog = inflate(myContext, R.layout.activity_koruklu_tente, null)
                 viewDialog.appBarLayoutKoruklu.visibility = View.GONE
@@ -113,7 +179,69 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 viewDialog.etSeritRengiAdeti.visibility = View.VISIBLE
                 viewDialog.chSeritRengiVarMi.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Koruklu.visibility = View.GONE
+                viewDialog.foto2Koruklu.visibility = View.GONE
+                viewDialog.foto3Koruklu.visibility = View.GONE
+                viewDialog.foto4Koruklu.visibility = View.GONE
+
+
+                viewDialog.foto1Koruklu.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Koruklu.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Koruklu.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Koruklu.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Koruklu)
+                    viewDialog.foto1Koruklu.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Koruklu)
+                    viewDialog.foto2Koruklu.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Koruklu)
+                    viewDialog.foto3Koruklu.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Koruklu)
+                    viewDialog.foto4Koruklu.visibility = View.VISIBLE
+                }
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.KorukluTenteData::class.java)!!
@@ -139,7 +267,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             if (itemData.siparis_turu == "Pergole") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                 var viewDialog = inflate(myContext, R.layout.activity_pergole, null)
-                viewDialog.imgPergole.visibility = View.GONE
+                //  viewDialog.imgPergole.visibility = View.GONE
                 viewDialog.appBarLayoutPergole.visibility = View.GONE
                 viewDialog.spPergoleTuru.visibility = View.GONE
                 viewDialog.spPergoleCesidi.visibility = View.GONE
@@ -148,7 +276,68 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 viewDialog.chKornerDirek.visibility = View.GONE
                 viewDialog.chCamVarMiVar.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Pergole.visibility = View.GONE
+                viewDialog.foto2Pergole.visibility = View.GONE
+                viewDialog.foto3Pergole.visibility = View.GONE
+                viewDialog.foto4Pergole.visibility = View.GONE
+
+                viewDialog.foto1Pergole.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Pergole.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Pergole.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Pergole.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Pergole)
+                    viewDialog.foto1Pergole.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Pergole)
+                    viewDialog.foto2Pergole.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Pergole)
+                    viewDialog.foto3Pergole.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Pergole)
+                    viewDialog.foto4Pergole.visibility = View.VISIBLE
+                }
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.PergoleData::class.java)!!
@@ -195,8 +384,68 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 viewDialog.appBarLayoutSemsiye.visibility = View.GONE
                 viewDialog.spSemsiyeTuru.visibility = View.GONE
 
+                viewDialog.foto1Semsiye.visibility = View.GONE
+                viewDialog.foto2Semsiye.visibility = View.GONE
+                viewDialog.foto3Semsiye.visibility = View.GONE
+                viewDialog.foto4Semsiye.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Semsiye.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Semsiye.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Semsiye.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Semsiye.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Semsiye)
+                    viewDialog.foto1Semsiye.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Semsiye)
+                    viewDialog.foto2Semsiye.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Semsiye)
+                    viewDialog.foto3Semsiye.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Semsiye)
+                    viewDialog.foto4Semsiye.visibility = View.VISIBLE
+                }
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.SemsiyeData::class.java)!!
@@ -214,12 +463,72 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             if (itemData.siparis_turu == "Karpuz Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                 var viewDialog = inflate(myContext, R.layout.activity_karpuz_tente, null)
-                //   viewDialog.imgSemsiye.visibility = View.GONE
                 viewDialog.appBarLayoutKarpuz.visibility = View.GONE
                 viewDialog.spSacakTuruKarpuz.visibility = View.GONE
 
+                viewDialog.foto1Karpuz.visibility = View.GONE
+                viewDialog.foto2Karpuz.visibility = View.GONE
+                viewDialog.foto3Karpuz.visibility = View.GONE
+                viewDialog.foto4Karpuz.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Karpuz.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Karpuz.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Karpuz.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Karpuz.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Karpuz)
+                    viewDialog.foto1Karpuz.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Karpuz)
+                    viewDialog.foto2Karpuz.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Karpuz)
+                    viewDialog.foto3Karpuz.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Karpuz)
+                    viewDialog.foto4Karpuz.visibility = View.VISIBLE
+                }
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.KarpuzData::class.java)!!
@@ -240,13 +549,73 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             if (itemData.siparis_turu == "Şeffaf") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                 var viewDialog = inflate(myContext, R.layout.activity_seffaf_tente, null)
-                //   viewDialog.imgSemsiye.visibility = View.GONE
+
                 viewDialog.appBarLayoutSeffaf.visibility = View.GONE
                 viewDialog.spFermuar.visibility = View.GONE
                 viewDialog.spBoruYeri.visibility = View.GONE
 
+                viewDialog.foto1Seffaf.visibility = View.GONE
+                viewDialog.foto2Seffaf.visibility = View.GONE
+                viewDialog.foto3Seffaf.visibility = View.GONE
+                viewDialog.foto4Seffaf.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Seffaf.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Seffaf.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Seffaf.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Seffaf.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Seffaf)
+                    viewDialog.foto1Seffaf.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Seffaf)
+                    viewDialog.foto2Seffaf.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Seffaf)
+                    viewDialog.foto3Seffaf.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Seffaf)
+                    viewDialog.foto4Seffaf.visibility = View.VISIBLE
+                }
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.SeffafData::class.java)!!
@@ -274,7 +643,69 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 viewDialog.spMantolamaWintend.visibility = View.GONE
                 viewDialog.appBarLayoutWintend.visibility = View.GONE
 
-                uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                viewDialog.foto1Wintent.visibility = View.GONE
+                viewDialog.foto2Wintent.visibility = View.GONE
+                viewDialog.foto3Wintent.visibility = View.GONE
+                viewDialog.foto4Wintent.visibility = View.GONE
+
+
+                viewDialog.foto1Wintent.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Wintent.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Wintent.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Wintent.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+
+                if (!itemData.foto1.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Wintent)
+                    viewDialog.foto1Wintent.visibility = View.VISIBLE
+                }
+                if (!itemData.foto2.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Wintent)
+                    viewDialog.foto2Wintent.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto3.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Wintent)
+                    viewDialog.foto3Wintent.visibility = View.VISIBLE
+                }
+
+                if (!itemData.foto4.isNullOrEmpty()) {
+                    Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Wintent)
+                    viewDialog.foto4Wintent.visibility = View.VISIBLE
+                }
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         var gelenData = p0.getValue(SiparisData.Wintend::class.java)!!
@@ -296,7 +727,168 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 var dialogSiparisTuru: Dialog = builder.create()
                 dialogSiparisTuru.show()
             }
+            if (itemData.siparis_turu == "Diğer") {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                var viewDialog = inflate(myContext, R.layout.activity_diger, null)
+                viewDialog.appBarLayoutDiger.visibility = View.GONE
+                viewDialog.foto1.visibility = View.GONE
+                viewDialog.foto2.visibility = View.GONE
+                viewDialog.foto3.visibility = View.GONE
+                viewDialog.foto4.visibility = View.GONE
 
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var gelenData = p0.getValue(SiparisData.Diger::class.java)!!
+                        viewDialog.etOlculerDiger.setText(gelenData.olculer)
+                        viewDialog.etSiparisNotuDiger.setText(itemData.siparis_notu)
+
+                        if (!itemData.foto1.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1)
+                            viewDialog.foto1.visibility = View.VISIBLE
+                        }
+                        if (!itemData.foto2.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2)
+                            viewDialog.foto2.visibility = View.VISIBLE
+                        }
+
+                        if (!itemData.foto3.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3)
+                            viewDialog.foto3.visibility = View.VISIBLE
+                        }
+
+                        if (!itemData.foto4.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4)
+                            viewDialog.foto4.visibility = View.VISIBLE
+                        }
+
+
+                    }
+                })
+
+                viewDialog.foto1.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+                builder.setView(viewDialog)
+                var dialogSiparisTuru: Dialog = builder.create()
+                dialogSiparisTuru.show()
+
+            }
+            if (itemData.siparis_turu == "Tamir") {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                var viewDialog = inflate(myContext, R.layout.activity_tamir, null)
+                viewDialog.appBarLayoutTamir.visibility = View.GONE
+                viewDialog.foto1Tamir.visibility = View.GONE
+                viewDialog.foto2Tamir.visibility = View.GONE
+                viewDialog.foto3Tamir.visibility = View.GONE
+                viewDialog.foto4Tamir.visibility = View.GONE
+
+                siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var gelenData = p0.getValue(SiparisData.Diger::class.java)!!
+                        viewDialog.etTamir.setText(gelenData.olculer)
+                        viewDialog.etSiparisNotuTamir.setText(itemData.siparis_notu)
+
+                        if (!itemData.foto1.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto1).resize(size, size).into(viewDialog.foto1Tamir)
+                            viewDialog.foto1Tamir.visibility = View.VISIBLE
+                        }
+                        if (!itemData.foto2.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto2).resize(size, size).into(viewDialog.foto2Tamir)
+                            viewDialog.foto2Tamir.visibility = View.VISIBLE
+                        }
+
+                        if (!itemData.foto3.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto3).resize(size, size).into(viewDialog.foto3Tamir)
+                            viewDialog.foto3Tamir.visibility = View.VISIBLE
+                        }
+
+                        if (!itemData.foto4.isNullOrEmpty()) {
+                            Picasso.get().load(itemData.foto4).resize(size, size).into(viewDialog.foto4Tamir)
+                            viewDialog.foto4Tamir.visibility = View.VISIBLE
+                        }
+
+
+                    }
+                })
+
+                viewDialog.foto1Tamir.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto1).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto2Tamir.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto2).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto3Tamir.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto3).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+                viewDialog.foto4Tamir.setOnLongClickListener {
+                    var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                    var viewDialog = inflate(myContext, R.layout.dialog_photo, null)
+                    Picasso.get().load(itemData.foto4).into(viewDialog.imgFoto)
+                    builder.setView(viewDialog)
+                    var dialogSiparisTuru: Dialog = builder.create()
+                    dialogSiparisTuru.show()
+                    return@setOnLongClickListener true
+                }
+
+                builder.setView(viewDialog)
+                var dialogSiparisTuru: Dialog = builder.create()
+                dialogSiparisTuru.show()
+
+            }
 
         }
 
@@ -484,7 +1076,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
                             alert.show()
                         }
-                         if (itemData.siparis_turu == "Wintend") {
+                        if (itemData.siparis_turu == "Wintend") {
                             var alert = AlertDialog.Builder(myContext)
                                 .setTitle("Üretimi tamamla").setMessage("Emin Misin ?").setPositiveButton("Gönder", object : DialogInterface.OnClickListener {
                                     override fun onClick(p0: DialogInterface?, p1: Int) {
@@ -493,6 +1085,66 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                                 override fun onCancelled(p0: DatabaseError) {}
                                                 override fun onDataChange(p0: DataSnapshot) {
                                                     var tenteData = p0.getValue(SiparisData.Wintend::class.java)!!
+                                                    ref.child("Montaj").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData).addOnCompleteListener {
+                                                        ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten").setValue(kullaniciKey)
+                                                        ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten_zaman").setValue(ServerValue.TIMESTAMP)
+                                                        ref.child("Uretim").child(itemData.siparis_key.toString()).removeValue()
+                                                        myContext.startActivity(Intent(myContext, MontajActivity::class.java))
+
+                                                    }
+
+                                                }
+                                            })
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                                        p0!!.dismiss()
+                                    }
+                                }).create()
+
+                            alert.show()
+                        }
+                        if (itemData.siparis_turu == "Diğer") {
+                            var alert = AlertDialog.Builder(myContext)
+                                .setTitle("Üretimi tamamla").setMessage("Emin Misin ?").setPositiveButton("Gönder", object : DialogInterface.OnClickListener {
+                                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                                        ref.child("Montaj").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
+                                            ref.child("Uretim").child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                                override fun onCancelled(p0: DatabaseError) {}
+                                                override fun onDataChange(p0: DataSnapshot) {
+                                                    var tenteData = p0.getValue(SiparisData.Diger::class.java)!!
+                                                    ref.child("Montaj").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData).addOnCompleteListener {
+                                                        ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten").setValue(kullaniciKey)
+                                                        ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten_zaman").setValue(ServerValue.TIMESTAMP)
+                                                        ref.child("Uretim").child(itemData.siparis_key.toString()).removeValue()
+                                                        myContext.startActivity(Intent(myContext, MontajActivity::class.java))
+
+                                                    }
+
+                                                }
+                                            })
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                                        p0!!.dismiss()
+                                    }
+                                }).create()
+
+                            alert.show()
+                        }
+                        if (itemData.siparis_turu == "Tamir") {
+                            var alert = AlertDialog.Builder(myContext)
+                                .setTitle("Üretimi tamamla").setMessage("Emin Misin ?").setPositiveButton("Gönder", object : DialogInterface.OnClickListener {
+                                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                                        ref.child("Montaj").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
+                                            ref.child("Uretim").child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                                override fun onCancelled(p0: DatabaseError) {}
+                                                override fun onDataChange(p0: DataSnapshot) {
+                                                    var tenteData = p0.getValue(SiparisData.Diger::class.java)!!
                                                     ref.child("Montaj").child(itemData.siparis_key.toString()).child("tenteData").setValue(tenteData).addOnCompleteListener {
                                                         ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten").setValue(kullaniciKey)
                                                         ref.child("Montaj").child(itemData.siparis_key.toString()).child("ureten_zaman").setValue(ServerValue.TIMESTAMP)
@@ -528,6 +1180,12 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.spMantolamaMafsalli.visibility = View.GONE
                             viewDialog.appBarLayoutMafsalli.visibility = View.GONE
 
+
+                            viewDialog.foto1Mafsalli.visibility = View.GONE
+                            viewDialog.foto2Mafsalli.visibility = View.GONE
+                            viewDialog.foto3Mafsalli.visibility = View.GONE
+                            viewDialog.foto4Mafsalli.visibility = View.GONE
+
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -556,7 +1214,6 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
                                     Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
-
                                     var cephe = viewDialog.etCephe.text.toString()
                                     var acilim = viewDialog.etAcilim.text.toString()
                                     var kumasKodu = viewDialog.etKumasKodu.text.toString()
@@ -567,12 +1224,12 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var siparisNot = viewDialog.etSiparisNotu.text.toString()
 
                                     var motorVar = viewDialog.etMotor.text.toString()
-                                    var ayakTuru = viewDialog.etAyakTuruMafsalli.text.toString()
-                                    var mantolama = viewDialog.etMantolamaMafsalli.text.toString()
+                                    var ayakTuru= viewDialog.etAyakTuruMafsalli.text.toString()
+                                    var mantolama= viewDialog.etMantolamaMafsalli.text.toString()
                                     var guncelData = SiparisData.MafsallıTente(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, motorVar, sanziman, ayakTuru, mantolama, profilRengi, itemData.siparis_key.toString())
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                    myContext.startActivity(Intent(myContext, TeklifActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
                                 }
                             })
@@ -591,6 +1248,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.appBarLayoutKoruklu.visibility = View.GONE
                             viewDialog.etSeritRengiAdeti.visibility = View.VISIBLE
                             viewDialog.chSeritRengiVarMi.visibility = View.GONE
+                            viewDialog.foto1Koruklu.visibility = View.GONE
+                            viewDialog.foto2Koruklu.visibility = View.GONE
+                            viewDialog.foto3Koruklu.visibility = View.GONE
+                            viewDialog.foto4Koruklu.visibility = View.GONE
 
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
@@ -612,10 +1273,13 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             })
 
 
+
                             builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
                                     dialog!!.dismiss()
                                 }
+
+
                             })
                             builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
@@ -632,27 +1296,14 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var ayakTuru = viewDialog.etAyakTuru.text.toString()
                                     var profilRengi = viewDialog.etProfilRengi.text.toString()
                                     var siparisNot = viewDialog.etSiparisNotu.text.toString()
-                                    var guncelData = SiparisData.KorukluTenteData(
-                                        cephe,
-                                        acilim,
-                                        kumasKodu,
-                                        sacakTuru,
-                                        sacakBiyesiRengi,
-                                        seritRengi,
-                                        seritRengiAdeti,
-                                        sacakYazisi,
-                                        ipyonu,
-                                        profilRengi,
-                                        ayakTuru,
-                                        itemData.siparis_key.toString()
-                                    )
+                                    var guncelData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakBiyesiRengi,seritRengi, seritRengiAdeti, sacakYazisi, ipyonu, profilRengi,ayakTuru, itemData.siparis_key.toString())
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
                                     myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
                                 }
+
                             })
-
-
                             builder.setView(viewDialog)
                             var dialogSiparisTuru: Dialog = builder.create()
                             dialogSiparisTuru.show()
@@ -668,6 +1319,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.chCamKaydi.visibility = View.GONE
                             viewDialog.chKornerDirek.visibility = View.GONE
                             viewDialog.chCamVarMiVar.visibility = View.GONE
+                            viewDialog.foto1Pergole.visibility = View.GONE
+                            viewDialog.foto2Pergole.visibility = View.GONE
+                            viewDialog.foto3Pergole.visibility = View.GONE
+                            viewDialog.foto4Pergole.visibility = View.GONE
 
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
@@ -742,6 +1397,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.spSemsiyeTuru.visibility = View.GONE
 
 
+                            viewDialog.foto1Semsiye.visibility = View.GONE
+                            viewDialog.foto2Semsiye.visibility = View.GONE
+                            viewDialog.foto3Semsiye.visibility = View.GONE
+                            viewDialog.foto4Semsiye.visibility = View.GONE
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -792,6 +1451,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.spSacakTuruKarpuz.visibility = View.GONE
 
 
+                            viewDialog.foto1Karpuz.visibility = View.GONE
+                            viewDialog.foto2Karpuz.visibility = View.GONE
+                            viewDialog.foto3Karpuz.visibility = View.GONE
+                            viewDialog.foto4Karpuz.visibility = View.GONE
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
                                 override fun onDataChange(p0: DataSnapshot) {
@@ -846,6 +1509,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.spFermuar.visibility = View.GONE
                             viewDialog.spBoruYeri.visibility = View.GONE
 
+                            viewDialog.foto1Seffaf.visibility = View.GONE
+                            viewDialog.foto2Seffaf.visibility = View.GONE
+                            viewDialog.foto3Seffaf.visibility = View.GONE
+                            viewDialog.foto4Seffaf.visibility = View.GONE
 
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
@@ -893,7 +1560,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             var dialogSiparisTuru: Dialog = builder.create()
                             dialogSiparisTuru.show()
                         }
-                        if (itemData.siparis_turu == "Wintend") {
+                        if (itemData.siparis_turu=="Wintend"){
                             var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
                             var viewDialog = inflate(myContext, R.layout.activity_wintent, null)
                             viewDialog.spSanzimanYonuWintend.visibility = View.GONE
@@ -902,6 +1569,11 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             viewDialog.spAyakTuruWintend.visibility = View.GONE
                             viewDialog.spMantolamaWintend.visibility = View.GONE
                             viewDialog.appBarLayoutWintend.visibility = View.GONE
+
+                            viewDialog.foto1Wintent.visibility = View.GONE
+                            viewDialog.foto2Wintent.visibility = View.GONE
+                            viewDialog.foto3Wintent.visibility = View.GONE
+                            viewDialog.foto4Wintent.visibility = View.GONE
 
                             uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {}
@@ -940,8 +1612,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                     var siparisNot = viewDialog.etSiparisNotuWintend.text.toString()
 
                                     var motorVar = viewDialog.etMotorWintend.text.toString()
-                                    var ayakTuru = viewDialog.etAyakTuruWintend.text.toString()
-                                    var mantolama = viewDialog.etMantolamaWintend.text.toString()
+                                    var ayakTuru= viewDialog.etAyakTuruWintend.text.toString()
+                                    var mantolama= viewDialog.etMantolamaWintend.text.toString()
                                     var guncelData = SiparisData.Wintend(cephe, kolboyu, kumasKodu, sacakTuru, sacakYazisi, motorVar, sanziman, ayakTuru, mantolama, profilRengi, itemData.siparis_key.toString())
                                     uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                     uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
@@ -954,6 +1626,92 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             builder.setView(viewDialog)
                             var dialogSiparisTuru: Dialog = builder.create()
                             dialogSiparisTuru.show()
+                        }
+                        if (itemData.siparis_turu == "Diğer") {
+                            var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                            var viewDialog = inflate(myContext, R.layout.activity_diger, null)
+                            viewDialog.appBarLayoutDiger.visibility = View.GONE
+                            viewDialog.foto1.visibility = View.GONE
+                            viewDialog.foto2.visibility = View.GONE
+                            viewDialog.foto3.visibility = View.GONE
+                            viewDialog.foto4.visibility = View.GONE
+
+                            uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    var gelenData = p0.getValue(SiparisData.Diger::class.java)!!
+                                    viewDialog.etOlculerDiger.setText(gelenData.olculer)
+                                    viewDialog.etSiparisNotuDiger.setText(itemData.siparis_notu)
+
+
+                                }
+                            })
+
+                            builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    dialog!!.dismiss()
+                                }
+                            })
+                            builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
+                                    var olcu = viewDialog.etOlculerDiger.text.toString()
+                                    var siparisNot = viewDialog.etSiparisNotuDiger.text.toString()
+                                    var guncelData = SiparisData.Diger(olcu, itemData.siparis_key.toString())
+                                    uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
+                                    uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+
+                                }
+                            })
+                            builder.setView(viewDialog)
+                            var dialogSiparisTuru: Dialog = builder.create()
+                            dialogSiparisTuru.show()
+
+                        }
+                        if (itemData.siparis_turu == "Tamir") {
+                            var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                            var viewDialog = inflate(myContext, R.layout.activity_tamir, null)
+                            viewDialog.appBarLayoutTamir.visibility = View.GONE
+                            viewDialog.foto1Tamir.visibility = View.GONE
+                            viewDialog.foto2Tamir.visibility = View.GONE
+                            viewDialog.foto3Tamir.visibility = View.GONE
+                            viewDialog.foto4Tamir.visibility = View.GONE
+
+                            uretimRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {}
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    var gelenData = p0.getValue(SiparisData.Diger::class.java)!!
+                                    viewDialog.etTamir.setText(gelenData.olculer)
+                                    viewDialog.etSiparisNotuTamir.setText(itemData.siparis_notu)
+
+
+                                }
+                            })
+
+                            builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    dialog!!.dismiss()
+                                }
+                            })
+                            builder.setPositiveButton("Güncelle", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    Toast.makeText(myContext, "Sipariş Güncellendi", Toast.LENGTH_LONG).show()
+                                    var tamir = viewDialog.etTamir.text.toString()
+                                    var siparisNot = viewDialog.etSiparisNotuTamir.text.toString()
+                                    var guncelData = SiparisData.Diger(tamir, itemData.siparis_key.toString())
+                                    uretimRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
+                                    uretimRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
+                                    myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+
+                                }
+                            })
+                            builder.setView(viewDialog)
+                            var dialogSiparisTuru: Dialog = builder.create()
+                            dialogSiparisTuru.show()
+
                         }
 
 
@@ -1007,14 +1765,16 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
 
         fun setData(siparisData: SiparisData) {
+            try {
+                siparisTuru.text = siparisData.siparis_turu
+                if (!siparisData.uretime_gonderen_zaman.toString().isNullOrEmpty()) {
+                    uretenZaman.text = formatData(siparisData.uretime_gonderen_zaman.toString().toLong()).toString()
+                }
+                musteriBilgileri(siparisData)
 
-            siparisTuru.text = siparisData.siparis_turu
-            if (!siparisData.uretime_gonderen_zaman.toString().isNullOrEmpty()) {
-                uretenZaman.text = formatData(siparisData.uretime_gonderen_zaman.toString().toLong()).toString()
+            } catch (e: IOException) {
+                Log.e("sad", siparisData.siparis_key.toString())
             }
-
-
-            musteriBilgileri(siparisData)
 
 
         }

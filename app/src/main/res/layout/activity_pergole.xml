@@ -12,12 +12,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPergole">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/appBarLayoutPergole"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/tvSiparisEkle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:text="Ekle"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pergole"
+                    android:textColor="@color/beyaz"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imgPergole"
@@ -56,11 +91,12 @@
                     <EditText
                         android:id="@+id/etPergoleTuru"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -85,11 +121,12 @@
                     <EditText
                         android:id="@+id/etCephePergole"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -114,11 +151,12 @@
                     <EditText
                         android:id="@+id/etAcilimPergole"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -142,11 +180,12 @@
                     <EditText
                         android:id="@+id/etArkaYukseklik"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -171,11 +210,12 @@
                     <EditText
                         android:id="@+id/etOnYukseklik"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -201,12 +241,13 @@
                     <EditText
                         android:id="@+id/etKumasRengi"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
 
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -230,11 +271,12 @@
                     <EditText
                         android:id="@+id/etProfilRengiPergole"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -258,11 +300,12 @@
                     <EditText
                         android:id="@+id/etLed"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -292,11 +335,12 @@
                     <EditText
                         android:id="@+id/etMotorYonu"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -335,12 +379,13 @@
                     <EditText
                         android:id="@+id/etKornerDirekOlcu"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:hint="Ölçü"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textColorHint="@color/beyaz"
@@ -349,12 +394,13 @@
                     <EditText
                         android:id="@+id/etKornerDirekAdet"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:hint="Adet"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textColorHint="@color/beyaz"
@@ -395,12 +441,13 @@
                     <EditText
                         android:id="@+id/etCamKaydi"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:hint="Ölçü"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textColorHint="@color/beyaz"
@@ -409,12 +456,13 @@
                     <EditText
                         android:id="@+id/etCamKaydiAdet"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:hint="Adet"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textColorHint="@color/beyaz"
@@ -447,11 +495,12 @@
                     <EditText
                         android:id="@+id/etCamVarmi"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textColorHint="@color/beyaz"
@@ -483,11 +532,12 @@
                     <EditText
                         android:id="@+id/etPergoleCesidi"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
-                        android:ems="5"
+                        android:ems="8"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -513,11 +563,12 @@
                     <EditText
                         android:id="@+id/etSiparisNotuPergole"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="5"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -526,45 +577,43 @@
                 </TableRow>
             </TableLayout>
 
+            <ImageView
+                android:id="@+id/foto1Pergole"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto2Pergole"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto3Pergole"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto4Pergole"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
         </LinearLayout>
     </ScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLayoutPergole"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvSiparisEkle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="Ekle"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pergole"
-            android:textColor="@color/beyaz"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

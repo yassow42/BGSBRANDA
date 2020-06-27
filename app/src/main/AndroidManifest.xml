@@ -3,6 +3,8 @@
     package="com.creativeoffice.bgsbranda">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,10 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SiparisTurleriActivity.WintentActivity"></activity>
+        <activity android:name=".Activity.MontajTamamlananActivity"></activity>
+        <activity android:name=".SiparisTurleriActivity.TamirActivity" />
+        <activity android:name=".SiparisTurleriActivity.DigerActivity" />
+        <activity android:name=".SiparisTurleriActivity.WintentActivity" />
         <activity android:name=".SiparisTurleriActivity.SeffafTenteActivity" />
         <activity android:name=".SiparisTurleriActivity.KarpuzTenteActivity" />
         <activity android:name=".SiparisTurleriActivity.SemsiyeActivity" />

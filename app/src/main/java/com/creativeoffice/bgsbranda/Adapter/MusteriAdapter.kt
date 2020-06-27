@@ -93,6 +93,18 @@ class MusteriAdapter(val myContext: Context, val musteriler: ArrayList<MusteriDa
                 myContext.startActivity(intent)
 
             }
+            viewDialog.tvDiger.setOnClickListener {
+                val intent = Intent(myContext, DigerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                intent.putExtra("musteriKey", itemData.musteri_key)
+                myContext.startActivity(intent)
+
+            }
+            viewDialog.tvTamir.setOnClickListener {
+                val intent = Intent(myContext, TamirActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                intent.putExtra("musteriKey", itemData.musteri_key)
+                myContext.startActivity(intent)
+
+            }
 
             builder.setView(viewDialog)
             var dialogSiparisTuru: Dialog = builder.create()

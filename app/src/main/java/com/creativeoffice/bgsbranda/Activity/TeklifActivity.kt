@@ -1,12 +1,14 @@
 package com.creativeoffice.bgsbranda.Activity
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.TeklifAdapter
 import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_teklif.*
 import java.lang.Exception
+import kotlin.math.log
 
 class TeklifActivity : AppCompatActivity() {
 
@@ -28,6 +31,7 @@ class TeklifActivity : AppCompatActivity() {
     lateinit var teklifList: ArrayList<SiparisData>
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
+
 
     var loading: Dialog? = null
 
@@ -40,8 +44,29 @@ class TeklifActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
         dialogCalistir()
-        Handler().postDelayed({ setupVeri() }, 1500)
-        Handler().postDelayed({ dialogGizle() }, 5000)
+
+        ref.child("users").child(userID).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                var yetki = p0.child("yetki").value.toString()
+
+                if (yetki == "Yönetici") {/*
+                    val intent = Intent(this@TeklifActivity, SiparislerActivity::class.java)
+                    startActivity(intent)
+                    finish()*/
+                    Handler().postDelayed({ setupVeri() }, 1500)
+                    Handler().postDelayed({ dialogGizle() }, 5000)
+
+                } else {
+                    Toast.makeText(this@TeklifActivity,"$yetki Görmek için yetkili değilsin!!..!!",Toast.LENGTH_LONG).show()
+                }
+            }
+
+        })
+
 
     }
 

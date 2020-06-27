@@ -140,6 +140,7 @@ class MusterilerActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
+        musteriler.sortBy { it.musteri_ad_soyad }
         rcMusteri.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val adapter = MusteriAdapter(this, musteriler, kullaniciAdi)
         rcMusteri.adapter = adapter

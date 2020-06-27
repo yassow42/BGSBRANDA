@@ -11,12 +11,49 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMafsalli">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/appBarLayoutMafsalli"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/tvSiparisEkle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:text="Ekle"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Mafsallı Tente"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imageView"
@@ -51,11 +88,12 @@
                     <EditText
                         android:id="@+id/etCephe"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -79,11 +117,12 @@
                     <EditText
                         android:id="@+id/etAcilim"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -107,11 +146,12 @@
                     <EditText
                         android:id="@+id/etKumasKodu"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -141,11 +181,12 @@
                     <EditText
                         android:id="@+id/etSacakTuruMafsalli"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -169,11 +210,12 @@
                     <EditText
                         android:id="@+id/etSacakYazisi"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -203,11 +245,12 @@
                     <EditText
                         android:id="@+id/etMotor"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -236,11 +279,12 @@
                     <EditText
                         android:id="@+id/etSanziman"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -264,16 +308,18 @@
                     <Spinner
                         android:id="@+id/spAyakYonuMafsalli"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:spinnerMode="dialog" />
 
                     <EditText
                         android:id="@+id/etAyakTuruMafsalli"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -297,16 +343,18 @@
                     <Spinner
                         android:id="@+id/spMantolamaMafsalli"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:spinnerMode="dialog" />
 
                     <EditText
                         android:id="@+id/etMantolamaMafsalli"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -330,11 +378,12 @@
                     <EditText
                         android:id="@+id/etProfilRengi"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -359,11 +408,12 @@
                     <EditText
                         android:id="@+id/etSiparisNotu"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
                         android:inputType="textPersonName"
+                        android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
@@ -371,48 +421,45 @@
 
                 </TableRow>
             </TableLayout>
+
+            <ImageView
+                android:id="@+id/foto1Mafsalli"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto2Mafsalli"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto3Mafsalli"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto4Mafsalli"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
         </LinearLayout>
     </ScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLayoutMafsalli"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvSiparisEkle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="Ekle"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Mafsallı Tente"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

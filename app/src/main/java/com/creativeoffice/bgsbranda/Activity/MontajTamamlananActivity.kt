@@ -1,16 +1,14 @@
 package com.creativeoffice.bgsbranda.Activity
 
 import android.app.Dialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.Menu
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.MontajAdapter
-import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
+import com.creativeoffice.bgsbranda.Adapter.MontajTamamlananAdapter
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
 import com.creativeoffice.bgsbranda.LoadingDialog
 import com.creativeoffice.bgsbranda.R
@@ -19,53 +17,36 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_montaj.*
+import kotlinx.android.synthetic.main.activity_montaj_tamamlanan.*
 
-
-class MontajActivity : AppCompatActivity() {
-    private val ACTIVITY_NO = 3
+class MontajTamamlananActivity : AppCompatActivity() {
     val ref = FirebaseDatabase.getInstance().reference
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
     lateinit var kullaniciAdi: String
-
     lateinit var montajList: ArrayList<SiparisData>
     var loading: Dialog? = null
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_montaj)
-        setupNavigationView()
+        setContentView(R.layout.activity_montaj_tamamlanan)
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         dialogCalistir()
         Handler().postDelayed({ setupVeri() }, 1500)
         Handler().postDelayed({ dialogGizle() }, 5000)
 
-        tamamlananMontaj.setOnClickListener {
-
-            val intent = Intent(this, MontajTamamlananActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-        }
-
-    }
-
-    fun dialogGizle() {
-        loading?.let { if (it.isShowing) it.cancel() }
-
-    }
-
-    fun dialogCalistir() {
-        dialogGizle()
-        loading = LoadingDialog.startDialog(this)
     }
 
 
     private fun setupVeri() {
         montajList = ArrayList()
-        ref.child("Montaj").addListenerForSingleValueEvent(object : ValueEventListener {
+        ref.child("Montaj_tamamlanan").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
@@ -80,26 +61,29 @@ class MontajActivity : AppCompatActivity() {
                             Log.e("montajDataHatası ", ex.message.toString())
                         }
                     }
-                    dialogGizle()
                     setupRecyclerView()
+                    dialogGizle()
+
                 }
             }
         })
     }
 
     private fun setupRecyclerView() {
-        rcMontaj.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val adapter = MontajAdapter(this, montajList, userID)
-        rcMontaj.adapter = adapter
-        rcMontaj.setHasFixedSize(true)
+        rcMontajTamamlanan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val adapter = MontajTamamlananAdapter(this, montajList, userID)
+        rcMontajTamamlanan.adapter = adapter
+        rcMontajTamamlanan.setHasFixedSize(true)
     }
 
 
-    fun setupNavigationView() {
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNav)
-        BottomNavigationViewHelper.setupNavigation(this, bottomNav) // Bottomnavhelper içinde setupNavigationda context ve nav istiyordu verdik...
-        var menu: Menu = bottomNav.menu
-        var menuItem = menu.getItem(ACTIVITY_NO)
-        menuItem.setChecked(true)
+    fun dialogGizle() {
+        loading?.let { if (it.isShowing) it.cancel() }
+
+    }
+
+    fun dialogCalistir() {
+        dialogGizle()
+        loading = LoadingDialog.startDialog(this)
     }
 }

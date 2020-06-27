@@ -17,6 +17,10 @@ class SiparisData {
     var ureten_zaman: Long? = null
     var montaj: String? = null
     var montaj_zaman: Long? = null
+    var foto1: String? = null
+    var foto2: String? = null
+    var foto3: String? = null
+    var foto4: String? = null
 
 
     constructor()
@@ -35,7 +39,11 @@ class SiparisData {
         ureten: String?,
         ureten_zaman: Long?,
         montaj: String?,
-        montaj_zaman: Long?
+        montaj_zaman: Long?,
+        foto1: String?,
+        foto2: String?,
+        foto3: String?,
+        foto4: String?
     ) {
         this.siparis_notu = siparis_notu
         this.siparis_turu = siparis_turu
@@ -52,6 +60,10 @@ class SiparisData {
         this.ureten_zaman = ureten_zaman
         this.montaj = montaj
         this.montaj_zaman = montaj_zaman
+        this.foto1 = foto1
+        this.foto2 = foto2
+        this.foto3 = foto3
+        this.foto4 = foto4
     }
 
 
@@ -170,6 +182,12 @@ class SiparisData {
         var ayakTuru: String?=null,
         var mantolama: String?=null,
         var profilRengi: String? = null,
+        var siparis_key: String? = null
+    ) {
+
+    }
+    data class Diger(
+        var olculer :String?=null,
         var siparis_key: String? = null
     ) {
 

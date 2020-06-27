@@ -48,16 +48,16 @@ import java.util.*
 import java.util.logging.Handler
 import kotlin.collections.ArrayList
 
-class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisData>, val kullaniciKey: String) : RecyclerView.Adapter<MontajAdapter.MontajHolder>() {
+class MontajTamamlananAdapter(val myContext: Context, val montajList: ArrayList<SiparisData>, val kullaniciKey: String) : RecyclerView.Adapter<MontajTamamlananAdapter.MontajHolder>() {
     val ref = FirebaseDatabase.getInstance().reference
-    val montajRef = FirebaseDatabase.getInstance().reference.child("Montaj")
-    val siparisRef = FirebaseDatabase.getInstance().reference.child("Montaj")
+    val montajRef = FirebaseDatabase.getInstance().reference.child("Montaj_tamamlanan")
+    val siparisRef = FirebaseDatabase.getInstance().reference.child("Montaj_tamamlanan")
 
     var musteriAdi: String? = null
     var musteriTelNo: String? = null
     var size = 450
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MontajAdapter.MontajHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MontajTamamlananAdapter.MontajHolder {
         val myView = LayoutInflater.from(myContext).inflate(R.layout.item_teklif, parent, false)
 
         return MontajHolder(myView)
@@ -67,7 +67,7 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
         return montajList.size
     }
 
-    override fun onBindViewHolder(holder: MontajAdapter.MontajHolder, position: Int) {
+    override fun onBindViewHolder(holder: MontajTamamlananAdapter.MontajHolder, position: Int) {
         val itemData = montajList[position]
         holder.setData(montajList[position])
 
@@ -339,36 +339,38 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
                     siparisRef.child(itemData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {}
                         override fun onDataChange(p0: DataSnapshot) {
-                            var gelenData = p0.getValue(SiparisData.PergoleData::class.java)!!
-                            viewDialog.etPergoleTuru.setText(gelenData.pergole_turu)
-                            viewDialog.etCephePergole.setText(gelenData.cephe)
-                            viewDialog.etArkaYukseklik.setText(gelenData.arka_yukseklik)
-                            viewDialog.etOnYukseklik.setText(gelenData.on_yukseklik)
-                            viewDialog.etAcilimPergole.setText(gelenData.acilim)
-                            viewDialog.etKumasRengi.setText(gelenData.kumas_rengi)
-                            viewDialog.etProfilRengiPergole.setText(gelenData.profil_rengi)
-                            viewDialog.etLed.setText(gelenData.led)
-                            viewDialog.etMotorYonu.setText(gelenData.motor_yonu)
-                            viewDialog.etKornerDirekOlcu.setText(gelenData.korner_direk_olcusu)
-                            viewDialog.etKornerDirekAdet.setText(gelenData.korner_direk_adeti)
-                            viewDialog.etCamKaydi.setText(gelenData.cam_kaydi_olcusu)
-                            viewDialog.etCamKaydiAdet.setText(gelenData.cam_kaydi_adeti)
-                            viewDialog.etCamVarmi.setText(gelenData.etrafinda_cam_varmi)
-                            viewDialog.etPergoleCesidi.setText(gelenData.pergole_cesidi)
-                            viewDialog.etSiparisNotuPergole.setText(itemData.siparis_notu)
+                            if (p0.hasChildren()) {
+                                var gelenData = p0.getValue(SiparisData.PergoleData::class.java)!!
+                                viewDialog.etPergoleTuru.setText(gelenData.pergole_turu)
+                                viewDialog.etCephePergole.setText(gelenData.cephe)
+                                viewDialog.etArkaYukseklik.setText(gelenData.arka_yukseklik)
+                                viewDialog.etOnYukseklik.setText(gelenData.on_yukseklik)
+                                viewDialog.etAcilimPergole.setText(gelenData.acilim)
+                                viewDialog.etKumasRengi.setText(gelenData.kumas_rengi)
+                                viewDialog.etProfilRengiPergole.setText(gelenData.profil_rengi)
+                                viewDialog.etLed.setText(gelenData.led)
+                                viewDialog.etMotorYonu.setText(gelenData.motor_yonu)
+                                viewDialog.etKornerDirekOlcu.setText(gelenData.korner_direk_olcusu)
+                                viewDialog.etKornerDirekAdet.setText(gelenData.korner_direk_adeti)
+                                viewDialog.etCamKaydi.setText(gelenData.cam_kaydi_olcusu)
+                                viewDialog.etCamKaydiAdet.setText(gelenData.cam_kaydi_adeti)
+                                viewDialog.etCamVarmi.setText(gelenData.etrafinda_cam_varmi)
+                                viewDialog.etPergoleCesidi.setText(gelenData.pergole_cesidi)
+                                viewDialog.etSiparisNotuPergole.setText(itemData.siparis_notu)
 
-                            if (gelenData.korner_direk_adeti.isNullOrEmpty()) {
-                                viewDialog.etKornerDirekAdet.visibility = View.GONE
-                            }
-                            if (gelenData.korner_direk_olcusu.isNullOrEmpty()) {
-                                viewDialog.etKornerDirekOlcu.visibility = View.GONE
-                            }
+                                if (gelenData.korner_direk_adeti.isNullOrEmpty()) {
+                                    viewDialog.etKornerDirekAdet.visibility = View.GONE
+                                }
+                                if (gelenData.korner_direk_olcusu.isNullOrEmpty()) {
+                                    viewDialog.etKornerDirekOlcu.visibility = View.GONE
+                                }
 
-                            if (gelenData.cam_kaydi_adeti.isNullOrEmpty()) {
-                                viewDialog.etCamKaydiAdet.visibility = View.GONE
-                            }
-                            if (gelenData.cam_kaydi_olcusu.isNullOrEmpty()) {
-                                viewDialog.etCamKaydi.visibility = View.GONE
+                                if (gelenData.cam_kaydi_adeti.isNullOrEmpty()) {
+                                    viewDialog.etCamKaydiAdet.visibility = View.GONE
+                                }
+                                if (gelenData.cam_kaydi_olcusu.isNullOrEmpty()) {
+                                    viewDialog.etCamKaydi.visibility = View.GONE
+                                }
                             }
 
 
@@ -1838,8 +1840,8 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
 
             siparisTuru.text = siparisData.siparis_turu
 
-            teklifFiyatı.visibility = View.INVISIBLE
-
+            teklifFiyatı.visibility = View.VISIBLE
+            teklifFiyatı.setText(siparisData.siparis_teklif.toString())
             if (!siparisData.teklif_veren_zaman.toString().isNullOrEmpty()) {
                 teklifVerenZaman.text = formatData(siparisData.teklif_veren_zaman.toString().toLong())
             }

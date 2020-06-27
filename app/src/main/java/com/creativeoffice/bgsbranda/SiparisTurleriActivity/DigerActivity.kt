@@ -5,10 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.creativeoffice.bgsbranda.Activity.SiparislerActivity
 import com.creativeoffice.bgsbranda.Datalar.SiparisData
@@ -18,12 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-
-import kotlinx.android.synthetic.main.activity_seffaf_tente.*
-import kotlinx.android.synthetic.main.activity_seffaf_tente.tvSiparisEkle
+import kotlinx.android.synthetic.main.activity_diger.*
 
 
-class SeffafTenteActivity : AppCompatActivity() {
+class DigerActivity : AppCompatActivity() {
     lateinit var progressDialog: ProgressDialog
 
     var profilPhotoUri1: Uri? = null
@@ -47,40 +44,34 @@ class SeffafTenteActivity : AppCompatActivity() {
 
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
-    var fermuar = ""
-    var boruYeri = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_seffaf_tente)
+        setContentView(R.layout.activity_diger)
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         var musteriKey = intent.getStringExtra("musteriKey")
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
-        spinnerAyarlari()
+
         siparisEkle(musteriKey)
+
 
     }
 
     private fun siparisEkle(musteriKey: String?) {
-        tvSiparisEkle.setOnClickListener {
-            var siparisNotu = etSiparisNotuSeffaf.text.toString()
-            var siparisKey = ref.child("Siparisler").push().key.toString()
-            var siparisTuru = "Şeffaf"
-            var siparisData = SiparisData(siparisNotu, siparisTuru, 0, siparisKey, musteriKey, userID, null, null, null, null,
-                null, null, null, null, null,  downloadUrl1, downloadUrl2, downloadUrl3, downloadUrl4)
+        tvSiparisEkleDiger.setOnClickListener {
+            var siparisNotu = etSiparisNotuDiger.text.toString()
+            var siparisTuru = "Diğer"
+            var siparisData = SiparisData(
+                siparisNotu, siparisTuru, 0, siparisKey, musteriKey, userID,
+                null, null, null, null, null, null, null, null, null,
+                downloadUrl1, downloadUrl2, downloadUrl3, downloadUrl4
+            )
 
             ref.child("Siparisler").child(siparisKey).setValue(siparisData).addOnCompleteListener {
                 ref.child("Siparisler").child(siparisKey).child("siparis_girme_zamani").setValue(ServerValue.TIMESTAMP)
 
-
-                val seffafMika = etMikaEni.text.toString()
-                val pvcRengi = etPVCRengi.text.toString()
-                val altPvc = etAltPvc.text.toString()
-                val ustPvc = etUstPvc.text.toString()
-                val ekstraSacak = etEksSacak.text.toString()
-
-
-                var tenteData = SiparisData.SeffafData(seffafMika, pvcRengi, altPvc, ustPvc, fermuar, boruYeri, ekstraSacak,siparisKey)
+                var olculer = etOlculerDiger.text.toString()
+                var tenteData = SiparisData.Diger(olculer, siparisKey)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -96,35 +87,38 @@ class SeffafTenteActivity : AppCompatActivity() {
         }
 
 
-        foto1Seffaf.setOnClickListener {
+        foto1.setOnClickListener {
             var intent = Intent()
 
             intent.setType("image/*")
             intent.setAction(Intent.ACTION_PICK)
             startActivityForResult(intent, RESIM_SEC1)
         }
-        foto2Seffaf.setOnClickListener {
+        foto2.setOnClickListener {
             var intent = Intent()
 
             intent.setType("image/*")
             intent.setAction(Intent.ACTION_PICK)
             startActivityForResult(intent, RESIM_SEC2)
         }
-        foto3Seffaf.setOnClickListener {
+        foto3.setOnClickListener {
             var intent = Intent()
 
             intent.setType("image/*")
             intent.setAction(Intent.ACTION_PICK)
             startActivityForResult(intent, RESIM_SEC3)
         }
-        foto4Seffaf.setOnClickListener {
+        foto4.setOnClickListener {
             var intent = Intent()
 
             intent.setType("image/*")
             intent.setAction(Intent.ACTION_PICK)
             startActivityForResult(intent, RESIM_SEC4)
         }
+
+
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var size = 250
         super.onActivityResult(requestCode, resultCode, data)
@@ -136,7 +130,7 @@ class SeffafTenteActivity : AppCompatActivity() {
 
 
             profilPhotoUri1 = data.data
-            Picasso.get().load(profilPhotoUri1).resize(size, size).into(foto1Seffaf)
+            Picasso.get().load(profilPhotoUri1).resize(size, size).into(foto1)
 
 
 
@@ -163,7 +157,7 @@ class SeffafTenteActivity : AppCompatActivity() {
             progressDialog.show()
 
             profilPhotoUri2 = data.data
-            Picasso.get().load(profilPhotoUri2).resize(size, size).into(foto2Seffaf)
+            Picasso.get().load(profilPhotoUri2).resize(size, size).into(foto2)
 
             if (profilPhotoUri2 != null) {
                 stRef.child(siparisKey).child("foto2").putFile(profilPhotoUri2!!) // burada fotografı kaydettik veritabanına.
@@ -188,7 +182,7 @@ class SeffafTenteActivity : AppCompatActivity() {
             progressDialog.show()
 
             profilPhotoUri3 = data.data
-            Picasso.get().load(profilPhotoUri3).resize(size, size).into(foto3Seffaf)
+            Picasso.get().load(profilPhotoUri3).resize(size, size).into(foto3)
 
             if (profilPhotoUri3 != null) {
                 stRef.child(siparisKey).child("foto3").putFile(profilPhotoUri3!!) // burada fotografı kaydettik veritabanına.
@@ -212,7 +206,7 @@ class SeffafTenteActivity : AppCompatActivity() {
             progressDialog.show()
 
             profilPhotoUri4 = data.data
-            Picasso.get().load(profilPhotoUri4).resize(size, size).into(foto4Seffaf)
+            Picasso.get().load(profilPhotoUri4).resize(size, size).into(foto4)
 
 
             if (profilPhotoUri4 != null) {
@@ -231,36 +225,5 @@ class SeffafTenteActivity : AppCompatActivity() {
         }
 
 
-    }
-
-
-    private fun spinnerAyarlari() {
-        etFermuar.visibility = View.GONE
-        var fermuarTurleri = arrayOf("Düz", "Kapaklı")
-        spFermuar.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fermuarTurleri)
-        spFermuar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                fermuar = "Düz"
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                fermuar = fermuarTurleri[position]
-            }
-
-        }
-
-        etBoruYeri.visibility = View.GONE
-        var boruYeriTurleri = arrayOf("Yok", "Var")
-        spBoruYeri.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, boruYeriTurleri)
-        spBoruYeri.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                boruYeri = "Yok"
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                boruYeri = boruYeriTurleri[position]
-            }
-
-        }
     }
 }

@@ -5,307 +5,358 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgSeffaf"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutSeffaf"
-        app:srcCompat="@drawable/koruklu_tente" />
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSeffaf">
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mika Eni"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etMikaEni"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PVC Rengi"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etPVCRengi"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alt PVC"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etAltPvc"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Üst PVC"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etUstPvc"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fermuar"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spFermuar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dialog" />
-
-            <EditText
-                android:id="@+id/etFermuar"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Boru Yeri"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spBoruYeri"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dialog" />
-
-            <EditText
-                android:id="@+id/etBoruYeri"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ekstra Sacak"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etEksSacak"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sipariş Notu"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/siyah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etSiparisNotuSeffaf"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/bg_edittext"
-                android:ems="7"
-                android:inputType="textPersonName"
-                android:paddingLeft="12dp"
-                android:textColor="@color/beyaz"
-                android:textStyle="bold" />
-
-
-        </TableRow>
-    </TableLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLayoutSeffaf"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:background="@color/colorPrimary"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvSiparisEkle"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="Ekle"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-        <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/appBarLayoutSeffaf"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary">
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Şeffaf"
-            android:textAlignment="center"
-            android:textColor="@color/beyaz"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvSiparisEkle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:text="Ekle"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Şeffaf"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imgSeffaf"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/koruklu_tente" />
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mika Eni"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etMikaEni"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PVC Rengi"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPVCRengi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alt PVC"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etAltPvc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Üst PVC"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etUstPvc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fermuar"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spFermuar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/etFermuar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Boru Yeri"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spBoruYeri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/etBoruYeri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ekstra Sacak"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etEksSacak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sipariş Notu"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSiparisNotuSeffaf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:ems="7"
+                        android:inputType="textPersonName"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+
+                </TableRow>
+            </TableLayout>
+
+            <ImageView
+                android:id="@+id/foto1Seffaf"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto2Seffaf"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto3Seffaf"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/foto4Seffaf"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/add" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
