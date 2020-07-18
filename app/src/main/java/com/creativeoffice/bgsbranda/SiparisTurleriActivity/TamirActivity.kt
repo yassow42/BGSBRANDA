@@ -15,6 +15,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_seffaf_tente.*
+
 import kotlinx.android.synthetic.main.activity_tamir.*
 
 class TamirActivity : AppCompatActivity() {
@@ -67,8 +69,9 @@ class TamirActivity : AppCompatActivity() {
             ref.child("Siparisler").child(siparisKey).setValue(siparisData).addOnCompleteListener {
                 ref.child("Siparisler").child(siparisKey).child("siparis_girme_zamani").setValue(ServerValue.TIMESTAMP)
 
+                var eksikler = etEksiklerTamir.text.toString()
                 var tamir = etTamir.text.toString()
-                var tenteData = SiparisData.Diger(tamir, siparisKey)
+                var tenteData = SiparisData.Diger(tamir, siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

@@ -78,7 +78,8 @@ class SiparisData {
         var ayakTuru: String?=null,
         var mantolama: String?=null,
         var profilRengi: String? = null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
     ) {
 
     }
@@ -95,7 +96,9 @@ class SiparisData {
         var ipYonu: String? = null,
         var profilRengi: String? = null,
         var ayakTuru:String?=null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
     ) {
 
         
@@ -117,7 +120,9 @@ class SiparisData {
         var cam_kaydi_adeti: String? = null,
         var pergole_cesidi: String? = null,
         var etrafinda_cam_varmi: String? = null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
     ) {
 
     }
@@ -130,7 +135,9 @@ class SiparisData {
         var genislik: String? = null,
         var kumas_rengi: String? = null,
         var sacak_yazisi: String? = null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
     ) {
 
 
@@ -146,7 +153,9 @@ class SiparisData {
         var sacak_yazisi: String? = null,
         var biye_rengi: String? = null,
         var serit_rengi: String? = null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
     ) {
 
 
@@ -161,7 +170,9 @@ class SiparisData {
         var fermuar: String? = null,
         var boru_yeri: String? = null,
         var ekstra_sacak: String? = null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
 
 
     ) {
@@ -182,13 +193,17 @@ class SiparisData {
         var ayakTuru: String?=null,
         var mantolama: String?=null,
         var profilRengi: String? = null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
     ) {
 
     }
     data class Diger(
         var olculer :String?=null,
-        var siparis_key: String? = null
+        var siparis_key: String? = null,
+        var eksikler: String? = null
+
     ) {
 
     }

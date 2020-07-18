@@ -19,7 +19,6 @@ import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_semsiye.*
-import kotlinx.android.synthetic.main.activity_semsiye.tvSiparisEkle
 
 
 class SemsiyeActivity : AppCompatActivity() {
@@ -76,8 +75,9 @@ class SemsiyeActivity : AppCompatActivity() {
                 val genislik = etGenislikSemsiye.text.toString()
                 val sacakYazisi = etSacakYazisiSemsiye.text.toString()
                 val kumasRengi = etKumasRengiSemsiye.text.toString()
+                var eksikler = etEksiklerSemsiye.text.toString()
 
-                var tenteData = SiparisData.SemsiyeData(semsiyeTuru, genislik, kumasRengi, sacakYazisi, siparisKey)
+                var tenteData = SiparisData.SemsiyeData(semsiyeTuru, genislik, kumasRengi, sacakYazisi, siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

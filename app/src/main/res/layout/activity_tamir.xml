@@ -122,6 +122,33 @@
 
                 </TableRow>
 
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eksikler varsa "
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etEksiklerTamir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
+
+                </TableRow>
             </TableLayout>
 
             <ImageView

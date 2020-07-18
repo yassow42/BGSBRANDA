@@ -36,13 +36,23 @@ class SiparislerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_siparisler)
         setupNavigationView()
         mAuth = FirebaseAuth.getInstance()
-        userID = mAuth.currentUser!!.uid
+
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         initMyAuthStateListener()
 
-        dialogCalistir()
+
         Handler().postDelayed({ setupVeri() }, 1500)
         Handler().postDelayed({ dialogGizle() }, 5000)
+
+        var user = mAuth.currentUser
+        if (user != null) {
+            userID = mAuth.currentUser!!.uid
+            dialogCalistir()
+        } else {
+            var intent = Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
 
     }
 
@@ -60,6 +70,15 @@ class SiparislerActivity : AppCompatActivity() {
 
         imgBack.setOnClickListener {
             mAuth.signOut()
+            var user = mAuth.currentUser
+            if (user != null) {
+                userID = mAuth.currentUser!!.uid
+                dialogCalistir()
+            } else {
+                var intent = Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                startActivity(intent)
+                finish()
+            }
         }
 
         ref.child("Siparisler").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -86,6 +105,7 @@ class SiparislerActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
+        siparislerList.sortBy { it.siparis_girme_zamani }
         rcSiparisler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val adapter = SiparisAdapter(this, siparislerList, userID)
         rcSiparisler.adapter = adapter

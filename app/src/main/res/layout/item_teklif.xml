@@ -13,53 +13,60 @@
         android:id="@+id/tvMusteriAdi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:maxWidth="165dp"
         android:text="dsa"
+        android:textAlignment="center"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTeklifVerenAdi"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="dsa"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvMusteriAdi"
-        app:layout_constraintTop_toBottomOf="@+id/tvMusteriAdi" />
+        android:maxWidth="85dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNot"
+        app:layout_constraintEnd_toStartOf="@+id/tvNot"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNot" />
 
     <TextView
         android:id="@+id/tvSiparisTuru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Tente"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
-        android:textStyle="bold"
 
-        app:layout_constraintBottom_toBottomOf="@+id/tvMusteriAdi"
-        app:layout_constraintEnd_toStartOf="@+id/tvMusteriTel"
-        app:layout_constraintStart_toEndOf="@+id/tvMusteriAdi"
-        app:layout_constraintTop_toTopOf="@+id/tvMusteriAdi" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMusteriAdi" />
 
     <TextView
         android:id="@+id/tvMusteriTel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="0541"
         android:textColor="@color/beyaz"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvMusteriAdi"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvMusteriAdi"
         app:layout_constraintTop_toTopOf="@+id/tvMusteriAdi" />
 
 
@@ -67,17 +74,15 @@
         android:id="@+id/tvTeklifFiyatı"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="1500 tl"
+        android:layout_marginStart="16dp"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvTeklifVerenZaman"
-        app:layout_constraintStart_toEndOf="@+id/tvTeklifVerenAdi"
-        app:layout_constraintTop_toBottomOf="@+id/tvSiparisTuru"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvMusteriAdi"
+        app:layout_constraintEnd_toStartOf="@+id/tvMusteriAdi"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvMusteriAdi" />
 
     <TextView
         android:id="@+id/tvTeklifVerenZaman"
@@ -88,7 +93,23 @@
         android:textColor="@color/beyaz"
         android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNot"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMusteriTel" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvNot"
+        app:layout_constraintTop_toTopOf="@+id/tvNot" />
+
+    <TextView
+        android:id="@+id/tvNot"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/beyaz"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvSiparisTuru"
+        app:layout_constraintStart_toStartOf="@+id/tvSiparisTuru"
+        app:layout_constraintTop_toBottomOf="@+id/tvSiparisTuru" />
 </androidx.constraintlayout.widget.ConstraintLayout>

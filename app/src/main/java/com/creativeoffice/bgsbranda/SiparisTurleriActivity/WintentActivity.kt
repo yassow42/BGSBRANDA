@@ -65,7 +65,6 @@ class WintentActivity : AppCompatActivity() {
     }
 
 
-
     private fun siparisEkle(musteriKey: String?) {
         tvSiparisEkleWintend.setOnClickListener {
 
@@ -85,9 +84,10 @@ class WintentActivity : AppCompatActivity() {
                 val kolBoyu = etKolBoyuWintend.text.toString()
                 val kumasKodu = etKumasKoduWintend.text.toString()
                 val sacakYazisi = etSacakYazisiWintend.text.toString()
+                var eksikler = etEksiklerWintent.text.toString()
 
                 val profilRengi = etProfilRengiWintend.text.toString()
-                var tenteData = SiparisData.Wintend(cephe, kolBoyu, kumasKodu, sacakTuru, sacakYazisi, motorVarMi, sanzimanYonu, ayakTuru, mantolamaVar, profilRengi, siparisKey)
+                var tenteData = SiparisData.Wintend(cephe, kolBoyu, kumasKodu, sacakTuru, sacakYazisi, motorVarMi, sanzimanYonu, ayakTuru, mantolamaVar, profilRengi, siparisKey, eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -315,6 +315,7 @@ class WintentActivity : AppCompatActivity() {
         }
 
     }
+
     fun setupKullaniciAdi() {
         FirebaseDatabase.getInstance().reference.child("users").child(userID).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {

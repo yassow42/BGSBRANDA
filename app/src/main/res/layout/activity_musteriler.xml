@@ -54,6 +54,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+    <AutoCompleteTextView
+        android:id="@+id/searchMs"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_edittext"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        android:hint="   Müşteri Ara"
+
+        android:textColor="@color/beyaz"
+        android:textSize="13sp"
+        android:textColorHint="@color/beyaz"
+        android:paddingLeft="8dp"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+
+
+
+        app:layout_constraintBottom_toBottomOf="@+id/imgMusteriAra"
+        app:layout_constraintEnd_toStartOf="@+id/imgMusteriAra"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgMusteriAra" />
+
+    <ImageView
+        android:id="@+id/imgMusteriAra"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/right"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/spinner"
+        app:srcCompat="@drawable/right" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:paddingLeft="2dp"
+
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcMusteri"
@@ -65,7 +108,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/searchMs"
         tools:itemCount="3"
         tools:listitem="@layout/item_musteri" />
 </androidx.constraintlayout.widget.ConstraintLayout>

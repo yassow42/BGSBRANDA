@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-
 import kotlinx.android.synthetic.main.activity_seffaf_tente.*
 import kotlinx.android.synthetic.main.activity_seffaf_tente.tvSiparisEkle
 
@@ -78,9 +77,10 @@ class SeffafTenteActivity : AppCompatActivity() {
                 val altPvc = etAltPvc.text.toString()
                 val ustPvc = etUstPvc.text.toString()
                 val ekstraSacak = etEksSacak.text.toString()
+                var eksikler = etEksiklerSeffaf.text.toString()
 
 
-                var tenteData = SiparisData.SeffafData(seffafMika, pvcRengi, altPvc, ustPvc, fermuar, boruYeri, ekstraSacak,siparisKey)
+                var tenteData = SiparisData.SeffafData(seffafMika, pvcRengi, altPvc, ustPvc, fermuar, boruYeri, ekstraSacak,siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

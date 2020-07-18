@@ -6,6 +6,7 @@
     <color name="siyah">#000</color>
     <color name="beyaz">#fff</color>
     <color name="mavi">#001EFF</color>
+    <color name="kirmizi">#FF0000</color>
     <color name="soluk_mavi">#5B89FB</color>
 
 </resources>

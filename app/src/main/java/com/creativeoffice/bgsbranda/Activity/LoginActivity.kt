@@ -21,9 +21,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login2.*
+import kotlinx.android.synthetic.main.dialog_register2.view.*
 
-import kotlinx.android.synthetic.main.dialog_register.view.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -32,21 +32,18 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login2)
         setupAuthListener()
 
         mAuth = FirebaseAuth.getInstance()
 
-        this.window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         //mAuth.signOut()
         btnRegister.setOnClickListener {
 
             var builder: AlertDialog.Builder = AlertDialog.Builder(this)
             var inflater: LayoutInflater = layoutInflater
-            var view: View = inflater.inflate(R.layout.dialog_register, null)
+            var view: View = inflater.inflate(R.layout.dialog_register2, null)
 
             builder.setView(view)
             var dialog: Dialog = builder.create()
@@ -104,10 +101,8 @@ class LoginActivity : AppCompatActivity() {
                 })
             }
 
-            dialog.show()
+          dialog.show()
         }
-
-
         btnLogin.setOnClickListener {
             var kullaniciAdi = etKullaniciAdiLogin.text.toString()
             var kullaniciAdiEmail = kullaniciAdi + "@gmail.com"

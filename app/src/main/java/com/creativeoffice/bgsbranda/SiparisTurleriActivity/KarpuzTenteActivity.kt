@@ -80,8 +80,9 @@ class KarpuzTenteActivity : AppCompatActivity() {
                 val biyeRengi = etBiyeRengiKarpuz.text.toString()
                 val seritRengi = etSeritRengiKarpuz.text.toString()
                 val kumasRengi = etKumasRengiKarpuz.text.toString()
+                var eksikler = etEksiklerKarpuz.text.toString()
 
-                var tenteData = SiparisData.KarpuzData(genislik,yukseklik,kumasRengi,sacakTuru,sacakYazisi,biyeRengi,seritRengi,siparisKey)
+                var tenteData = SiparisData.KarpuzData(genislik,yukseklik,kumasRengi,sacakTuru,sacakYazisi,biyeRengi,seritRengi,siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

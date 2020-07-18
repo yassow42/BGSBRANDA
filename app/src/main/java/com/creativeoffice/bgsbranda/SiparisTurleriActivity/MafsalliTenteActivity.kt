@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_diger.*
 
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.*
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.etAcilim
@@ -94,9 +95,10 @@ class MafsalliTenteActivity : AppCompatActivity() {
                 val acilim = etAcilim.text.toString()
                 val kumasKodu = etKumasKodu.text.toString()
                 val sacakYazisi = etSacakYazisi.text.toString()
+                var eksikler = etEksiklerMafsalli.text.toString()
 
                 val profilRengi = etProfilRengi.text.toString()
-                var tenteData = SiparisData.MafsallıTente(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, motorVarMi, sanzimanYonu, ayakTuru, mantolamaVar, profilRengi, siparisKey)
+                var tenteData = SiparisData.MafsallıTente(cephe, acilim, kumasKodu, sacakTuru, sacakYazisi, motorVarMi, sanzimanYonu, ayakTuru, mantolamaVar, profilRengi, siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

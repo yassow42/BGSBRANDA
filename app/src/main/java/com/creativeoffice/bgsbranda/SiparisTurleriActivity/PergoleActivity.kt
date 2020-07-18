@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_diger.*
 import kotlinx.android.synthetic.main.activity_pergole.*
 import kotlinx.android.synthetic.main.activity_pergole.tvSiparisEkle
 
@@ -87,9 +86,11 @@ class PergoleActivity : AppCompatActivity() {
                 val kornerDirekAdet = etKornerDirekAdet.text.toString()
                 val camkaydiOlcusu = etCamKaydi.text.toString()
                 val camkaydiAdet = etCamKaydiAdet.text.toString()
+                var eksikler = etEksiklerPergole.text.toString()
+
 
                 var tenteData = SiparisData.PergoleData(pergoleTuru,cephe, acilim,arkaYukseklik,onYukseklik, kumasRengi, profilRengi, led,motorYonu,kornerDirekOlcusu,kornerDirekAdet,
-                    camkaydiOlcusu,camkaydiAdet, pergoleCesidi,etrafindaCamVarmi,siparisKey)
+                    camkaydiOlcusu,camkaydiAdet, pergoleCesidi,etrafindaCamVarmi,siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

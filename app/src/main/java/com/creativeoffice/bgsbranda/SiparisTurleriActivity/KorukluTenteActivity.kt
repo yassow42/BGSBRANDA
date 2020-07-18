@@ -90,6 +90,7 @@ class KorukluTenteActivity : AppCompatActivity() {
                 val sacakBiyesiRengi = etSacakBiyesRengi.text.toString()
                 val sacakYazisi = etSacakYazisi.text.toString()
                 val profilRengi = etProfilRengi.text.toString()
+                var eksikler = etEksiklerKoruklu.text.toString()
 
                 val seritRengi = etSeritRengi.text.toString()
                 if (!etSeritRengiAdeti.text.isNullOrEmpty()) {
@@ -97,7 +98,7 @@ class KorukluTenteActivity : AppCompatActivity() {
                 }
 
 
-                var tenteData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakBiyesiRengi, seritRengi, seritRengiAdeti, sacakYazisi, ipYonu, profilRengi, ayakTuru, siparisKey)
+                var tenteData = SiparisData.KorukluTenteData(cephe, acilim, kumasKodu, sacakTuru, sacakBiyesiRengi, seritRengi, seritRengiAdeti, sacakYazisi, ipYonu, profilRengi, ayakTuru, siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

@@ -3,6 +3,7 @@ package com.creativeoffice.bgsbranda
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 
 
 object LoadingDialog {
@@ -12,7 +13,7 @@ object LoadingDialog {
 
         progressDialog.let {
             it.show()
-          // it.window?.setBackgroundDrawableResource(R.color.siyah)
+            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             it.setContentView(R.layout.proggres_dialog)
             it.setCancelable(true)
             it.setCanceledOnTouchOutside(true)

@@ -71,7 +71,8 @@ class DigerActivity : AppCompatActivity() {
                 ref.child("Siparisler").child(siparisKey).child("siparis_girme_zamani").setValue(ServerValue.TIMESTAMP)
 
                 var olculer = etOlculerDiger.text.toString()
-                var tenteData = SiparisData.Diger(olculer, siparisKey)
+                var eksikler = etEksiklerDiger.text.toString()
+                var tenteData = SiparisData.Diger(olculer, siparisKey,eksikler)
 
                 ref.child("Siparisler").child(siparisKey).child("tenteData").setValue(tenteData).addOnCompleteListener {
                     val intent = Intent(this, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

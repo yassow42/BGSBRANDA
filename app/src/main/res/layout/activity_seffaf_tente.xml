@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -90,7 +89,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -119,7 +117,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -148,7 +145,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -177,7 +173,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -213,7 +208,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -248,7 +242,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -278,7 +271,6 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -310,12 +302,39 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
-                        android:inputType="textPersonName"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
                         android:textStyle="bold" />
 
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eksikler varsa "
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/siyah"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etEksiklerSeffaf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/bg_edittext"
+                        android:minHeight="35dp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/beyaz"
+                        android:textStyle="bold" />
 
                 </TableRow>
             </TableLayout>
