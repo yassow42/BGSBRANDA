@@ -164,6 +164,8 @@ class MusteriAdapter(val myContext: Context, val musteriler: ArrayList<MusteriDa
                                 override fun onClick(p0: DialogInterface?, p1: Int) {
                                     ref.child("Musteriler").child(musteriler[position].musteri_key.toString()).removeValue()
                                     myContext.startActivity(Intent(myContext, MusterilerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                    ref.child("Silinenler/Musteriler").child(itemData.musteri_key.toString()).setValue(itemData)
+
 
                                 }
                             })

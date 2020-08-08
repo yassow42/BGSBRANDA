@@ -1,5 +1,6 @@
 package com.creativeoffice.bgsbranda.Adapter
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -12,6 +13,7 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.creativeoffice.bgsbranda.Activity.SiparislerActivity
 import com.creativeoffice.bgsbranda.Activity.TeklifActivity
@@ -85,7 +87,9 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
     override fun onBindViewHolder(holder: SiparisAdapter.SiparisHolder, position: Int) {
         val itemData = siparisler[position]
         holder.setData(siparisler[position])
-
+        if (itemData.siparis_turu == "Tamir") {
+            holder.tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.turuncu))
+        }
         holder.itemView.setOnClickListener {
             if (itemData.siparis_turu == "Mafsallı Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
@@ -934,7 +938,6 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                                     siparisRef.child(itemData.siparis_key.toString()).child("siparis_teklif").setValue(fiyat).addOnCompleteListener {
                                         siparisRef.child(itemData.siparis_key.toString()).child("teklif_veren").setValue(kullaniciKey.toString())
                                         siparisRef.child(itemData.siparis_key.toString()).child("teklif_veren_zaman").setValue(ServerValue.TIMESTAMP)
-                                        myContext.startActivity(Intent(myContext, TeklifActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
                                         if (itemData.siparis_turu == "Mafsallı Tente") {
                                             siparisRef.child(itemData.siparis_key.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -1102,6 +1105,7 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
 
                                         }
 
+                                        myContext.startActivity(Intent(myContext, TeklifActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
                                     }
 
@@ -1717,18 +1721,21 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                                 .setMessage("Emin Misin ?")
                                 .setPositiveButton("Sil", object : DialogInterface.OnClickListener {
                                     override fun onClick(p0: DialogInterface?, p1: Int) {
-                                        ref.child("SilinenSiparisler").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
+                                        ref.child("Silinen/Siparisler").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
                                             siparisRef.child(itemData.siparis_key.toString()).removeValue()
                                             FirebaseStorage.getInstance().reference.child(itemData.siparis_key.toString()).delete()
+                                            siparisler.removeAt(position)
+                                            notifyDataSetChanged()
+
                                         }
                                     }
                                 })
                                 .setNegativeButton("İptal", object : DialogInterface.OnClickListener {
                                     override fun onClick(p0: DialogInterface?, p1: Int) {
                                         p0!!.dismiss()
+
                                     }
                                 }).create()
-
                             alert.show()
                         } else {
                             Toast.makeText(myContext, "Yetkin yok", Toast.LENGTH_LONG).show()
@@ -1748,12 +1755,14 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
     }
 
     inner class SiparisHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var tumLayout = itemView.tumLayout
         var musteriAd = itemView.tvMusteriAdi
         var telNo = itemView.tvMusteriTel
         var siparisTuru = itemView.tvSiparisTuru
         var siparisGiren = itemView.tvSiparisGirenAdi
         var siparisGirmeZamani = itemView.tvSiparisGirmeZamani
         var not = itemView.tvNot
+        var tvEksikler = itemView.tvEksik
 
 
         fun setData(siparisData: SiparisData) {
@@ -1769,6 +1778,23 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
 
             }
 
+            siparisRef.child(siparisData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    var eksikler = p0.child("eksikler").value.toString()
+                    if (eksikler != "null") {
+                        if (eksikler == "ölçü" || eksikler == "Ölçü" || eksikler == "Olcu" || eksikler == "olcu") {
+                            tvEksikler.text = "Ölçü Alınacak"
+                            tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.sari))
+                        } else if (eksikler.length > 0) {
+                            tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.mavi))
+                            tvEksikler.visibility = View.VISIBLE
+                            tvEksikler.text = "Eksikler; " + eksikler
+                        }
+
+                    }
+                }
+            })
 
         }
 
@@ -1797,6 +1823,9 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
                         musteriAd.text = p0.child("musteri_ad_soyad").value.toString()
                         telNo.text = p0.child("musteri_tel").value.toString()
 
+                    } else {
+                        musteriAd.text = "Hata"
+                        telNo.text = "Hata"
                     }
 
                 }

@@ -8,6 +8,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.creativeoffice.bgsbranda.Adapter.SiparisAdapter
 import com.creativeoffice.bgsbranda.BottomNavigationViewHelper
@@ -35,15 +36,16 @@ class SiparislerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_siparisler)
         setupNavigationView()
-        mAuth = FirebaseAuth.getInstance()
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+
+        Toast.makeText(this, "Kırmızılar; Tamir, Sarılar; Ölçü Alınacak, Mavi;Eksik var", Toast.LENGTH_LONG).show()
+        setupVeri()
+        Handler().postDelayed({ dialogGizle() }, 3000)
+
         initMyAuthStateListener()
-
-
-        Handler().postDelayed({ setupVeri() }, 1500)
-        Handler().postDelayed({ dialogGizle() }, 5000)
-
+        mAuth = FirebaseAuth.getInstance()
         var user = mAuth.currentUser
         if (user != null) {
             userID = mAuth.currentUser!!.uid
@@ -56,15 +58,6 @@ class SiparislerActivity : AppCompatActivity() {
 
     }
 
-    fun dialogGizle() {
-        loading?.let { if (it.isShowing) it.cancel() }
-
-    }
-
-    fun dialogCalistir() {
-        dialogGizle()
-        loading = LoadingDialog.startDialog(this)
-    }
 
     private fun setupVeri() {
 
@@ -102,6 +95,16 @@ class SiparislerActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun dialogGizle() {
+        loading?.let { if (it.isShowing) it.cancel() }
+
+    }
+
+    fun dialogCalistir() {
+        dialogGizle()
+        loading = LoadingDialog.startDialog(this)
     }
 
     private fun setupRecyclerView() {

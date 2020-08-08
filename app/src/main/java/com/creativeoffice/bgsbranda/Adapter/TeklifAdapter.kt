@@ -13,6 +13,7 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.creativeoffice.bgsbranda.Activity.MontajActivity
 import com.creativeoffice.bgsbranda.Activity.SiparislerActivity
@@ -88,7 +89,9 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
     override fun onBindViewHolder(holder: TeklifAdapter.TeklifHolder, position: Int) {
         val itemData = teklifler[position]
         holder.setData(teklifler[position])
-
+        if (itemData.siparis_turu == "Tamir") {
+            holder.tumLayout.setBackgroundColor(ContextCompat.getColor(myContext,R.color.turuncu))
+        }
         holder.itemView.setOnClickListener {
             if (itemData.siparis_turu == "Mafsallı Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
@@ -1673,6 +1676,7 @@ class TeklifAdapter(val myContext: Context, val teklifler: ArrayList<SiparisData
     }
 
     inner class TeklifHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var tumLayout = itemView.tumLayout
         var musteriAd = itemView.tvMusteriAdi
         var telNo = itemView.tvMusteriTel
         var siparisTuru = itemView.tvSiparisTuru

@@ -4,7 +4,9 @@
     <item
         android:id="@+id/popMontajıTamamla"
         android:title="Montajı Tamamla" />
-
+    <item
+        android:id="@+id/popDüzenleTeklif"
+        android:title="Teklifi Düzenle" />
     <item
         android:id="@+id/popDüzenleMontaj"
         android:title="Siparişi Düzenle" />

@@ -40,7 +40,7 @@ class UretimActivity : AppCompatActivity() {
         userID = mAuth.currentUser!!.uid
 
         dialogCalistir()
-        Handler().postDelayed({ setupVeri() }, 1500)
+        setupVeri()
         Handler().postDelayed({ dialogGizle() }, 5000)
 
     }
@@ -87,7 +87,7 @@ class UretimActivity : AppCompatActivity() {
         rcUretim.setHasFixedSize(true)
     }
 
-    fun setupNavigationView() {
+    private fun setupNavigationView() {
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNav)
         BottomNavigationViewHelper.setupNavigation(this, bottomNav) // Bottomnavhelper içinde setupNavigationda context ve nav istiyordu verdik...
         var menu: Menu = bottomNav.menu

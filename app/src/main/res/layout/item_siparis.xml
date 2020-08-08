@@ -24,11 +24,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:maxWidth="85dp"
         android:id="@+id/tvSiparisGirenAdi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:maxWidth="85dp"
         android:text="dsa"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
@@ -92,9 +92,22 @@
         android:text="Not"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvEksik"
         app:layout_constraintEnd_toEndOf="@+id/tvSiparisTuru"
         app:layout_constraintStart_toStartOf="@+id/tvSiparisTuru"
         app:layout_constraintTop_toBottomOf="@+id/tvSiparisTuru" />
+
+    <TextView
+        android:id="@+id/tvEksik"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Eksikler"
+        android:textColor="@color/beyaz"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/popUretimiTamamla"
-        android:title="Üretimi Tamamla" />
+        android:id="@+id/popSiparisGir"
+        android:title="Sipariş Gir" />
     <item
-        android:id="@+id/popDüzenleTeklif"
-        android:title="Teklifi Düzenle" />
-    <item
-        android:id="@+id/popDüzenle"
+        android:id="@+id/popMusteriDuzenle"
         android:title="Düzenle" />
+
     <item
         android:id="@+id/popSil"
         android:title="Sil" />

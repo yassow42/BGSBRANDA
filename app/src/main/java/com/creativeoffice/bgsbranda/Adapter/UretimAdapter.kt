@@ -13,6 +13,7 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.creativeoffice.bgsbranda.Activity.MontajActivity
 import com.creativeoffice.bgsbranda.Activity.SiparislerActivity
@@ -40,6 +41,7 @@ import kotlinx.android.synthetic.main.activity_tamir.view.*
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.*
 import kotlinx.android.synthetic.main.activity_wintent.view.*
 import kotlinx.android.synthetic.main.dialog_photo.view.*
+import kotlinx.android.synthetic.main.dialog_teklif_ver.view.*
 
 import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriAdi
 import kotlinx.android.synthetic.main.item_siparis.view.tvMusteriTel
@@ -64,14 +66,13 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
 
     var size = 450
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UretimAdapter.UretimHolder {
-        val myView =LayoutInflater.from(myContext).inflate(R.layout.item_uretim, parent, false)
+
+    init {
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
 
         ref.child("users").child(userID).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-
             }
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -79,6 +80,11 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             }
 
         })
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UretimAdapter.UretimHolder {
+        val myView = LayoutInflater.from(myContext).inflate(R.layout.item_uretim, parent, false)
+
         return UretimHolder(myView)
     }
 
@@ -1194,6 +1200,30 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
 
                     }
+                    R.id.popDüzenleTeklif -> {
+                        var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                        var viewDialog = inflate(myContext, R.layout.dialog_teklif_ver, null)
+                        viewDialog.etTeklifFiyati.setText(itemData.siparis_teklif.toString())
+
+                        builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                dialog!!.dismiss()
+                            }
+                        })
+                        builder.setPositiveButton("Teklifi Güncelle", object : DialogInterface.OnClickListener {
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                var fiyat = viewDialog.etTeklifFiyati.text.toString().toInt()
+                                uretimRef.child(itemData.siparis_key.toString()).child("siparis_teklif").setValue(fiyat).addOnCompleteListener {
+                                    myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                                }
+
+                            }
+                        })
+
+                        builder.setView(viewDialog)
+                        var dialog: Dialog = builder.create()
+                        dialog.show()
+                    }
                     R.id.popDüzenle -> {
                         if (yetki == "Yönetici") {
                             if (itemData.siparis_turu == "Mafsallı Tente") {
@@ -1256,7 +1286,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         )
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
                                     }
                                 })
@@ -1341,7 +1371,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         )
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
                                     }
                                 })
 
@@ -1429,7 +1460,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         )
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
 
                                     }
 
@@ -1484,7 +1516,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         var guncelData = SiparisData.SemsiyeData(semsiyeTuru, genislik, kumasRengi, sacakYazisi, itemData.siparis_key.toString(), eksikler)
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
 
                                     }
 
@@ -1547,7 +1580,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         var guncelData = SiparisData.KarpuzData(genislik, yukseklik, kumasRengi, sacakTuru, sacakYazisi, sacakBiyesiRengi, seritRengi, itemData.siparis_key.toString(), eksikler)
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
                                     }
                                 })
 
@@ -1608,7 +1642,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
                                     }
                                 })
 
@@ -1681,7 +1716,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
 
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
                                     }
                                 })
@@ -1727,7 +1762,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         var guncelData = SiparisData.Diger(olcu, itemData.siparis_key.toString(), eksikler)
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
 
 
                                     }
@@ -1773,7 +1809,8 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         var guncelData = SiparisData.Diger(tamir, itemData.siparis_key.toString(), eksikler)
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
-                                        myContext.startActivity(Intent(myContext, SiparislerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                        myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
 
 
                                     }
@@ -1795,8 +1832,10 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                             .setMessage("Emin Misin ?")
                             .setPositiveButton("Sil", object : DialogInterface.OnClickListener {
                                 override fun onClick(p0: DialogInterface?, p1: Int) {
-                                    ref.child("SilinenUretimler").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
+                                    ref.child("Silinenler/Uretim").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
                                         uretimRef.child(itemData.siparis_key.toString()).removeValue()
+                                        uretimler.removeAt(position)
+                                        notifyDataSetChanged()
                                     }
                                 }
                             })
@@ -1821,12 +1860,14 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
     }
 
     inner class UretimHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var tumLayout = itemView.tumLayout
         var musteriAd = itemView.tvMusteriAdi
         var telNo = itemView.tvMusteriTel
         var siparisTuru = itemView.tvSiparisTuru
         var ureten = itemView.tvUretenAdi
         var uretenZaman = itemView.tvUretenZamani
         var not = itemView.tvNot
+        var tvEksikler = itemView.tvEksik
 
 
         fun setData(siparisData: SiparisData) {
@@ -1843,6 +1884,19 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
             }
 
 
+            uretimRef.child(siparisData.siparis_key.toString()).child("tenteData").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    var eksikler = p0.child("eksikler").value.toString()
+                    if (eksikler != "null") {
+                        if (eksikler.length > 0) {
+                            tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.mavi))
+                            tvEksikler.visibility =View.VISIBLE
+                            tvEksikler.text = "Eksikler; "+ eksikler
+                        }
+                    }
+                }
+            })
         }
 
         fun formatData(time: Long): String {

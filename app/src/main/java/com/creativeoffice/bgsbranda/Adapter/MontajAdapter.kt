@@ -43,6 +43,7 @@ import kotlinx.android.synthetic.main.activity_tamir.view.*
 import kotlinx.android.synthetic.main.activity_tente_mafsalli.view.*
 import kotlinx.android.synthetic.main.activity_wintent.view.*
 import kotlinx.android.synthetic.main.dialog_photo.view.*
+import kotlinx.android.synthetic.main.dialog_teklif_ver.view.*
 
 import kotlinx.android.synthetic.main.item_teklif.view.*
 import java.io.IOException
@@ -64,8 +65,7 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
     var musteriAdi: String? = null
     var size = 450
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MontajAdapter.MontajHolder {
-        val myView = LayoutInflater.from(myContext).inflate(R.layout.item_teklif, parent, false)
+    init {
         mAuth = FirebaseAuth.getInstance()
         userID = mAuth.currentUser!!.uid
 
@@ -79,6 +79,11 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
             }
 
         })
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MontajAdapter.MontajHolder {
+        val myView = LayoutInflater.from(myContext).inflate(R.layout.item_teklif, parent, false)
+
         return MontajHolder(myView)
     }
 
@@ -89,7 +94,9 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
     override fun onBindViewHolder(holder: MontajAdapter.MontajHolder, position: Int) {
         val itemData = montajList[position]
         holder.setData(montajList[position])
-
+        if (itemData.siparis_turu == "Tamir") {
+            holder.tumLayout.setBackgroundColor(ContextCompat.getColor(myContext,R.color.turuncu))
+        }
 
         holder.itemView.setOnClickListener {
             if (itemData.siparis_turu == "Mafsallı Tente") {
@@ -1248,6 +1255,30 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
 
 
                     }
+                    R.id.popDüzenleTeklif -> {
+                        var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)
+                        var viewDialog = inflate(myContext, R.layout.dialog_teklif_ver, null)
+                        viewDialog.etTeklifFiyati.setText(itemData.siparis_teklif.toString())
+
+                        builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                dialog!!.dismiss()
+                            }
+                        })
+                        builder.setPositiveButton("Teklifi Güncelle", object : DialogInterface.OnClickListener {
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                var fiyat = viewDialog.etTeklifFiyati.text.toString().toInt()
+                                montajRef.child(itemData.siparis_key.toString()).child("siparis_teklif").setValue(fiyat).addOnCompleteListener {
+                                    myContext.startActivity(Intent(myContext, TeklifActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                }
+
+                            }
+                        })
+
+                        builder.setView(viewDialog)
+                        var dialog: Dialog = builder.create()
+                        dialog.show()
+                    }
                     R.id.popDüzenleMontaj -> {
                         if (yetki == "Yönetici") {
                             if (itemData.siparis_turu == "Mafsallı Tente") {
@@ -1848,8 +1879,10 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
                             .setMessage("Emin Misin ?")
                             .setPositiveButton("Sil", object : DialogInterface.OnClickListener {
                                 override fun onClick(p0: DialogInterface?, p1: Int) {
-                                    ref.child("SilinenTeklifler").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
+                                    ref.child("Silinenler/Montajlar").child(itemData.siparis_key.toString()).setValue(itemData).addOnCompleteListener {
                                         montajRef.child(itemData.siparis_key.toString()).removeValue()
+                                        montajList.removeAt(position)
+                                        notifyDataSetChanged()
                                     }
                                 }
                             })
@@ -1897,17 +1930,19 @@ class MontajAdapter(val myContext: Context, val montajList: ArrayList<SiparisDat
             }
 
 
-
             montajRef.child(siparisData.siparis_key.toString()).child("tenteData").child("eksikler").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
-
                 override fun onDataChange(p0: DataSnapshot) {
                     var eksikler = p0.value.toString()
-                    if (eksikler.length > 4) {
-                        tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.kirmizi))
+                    if (eksikler != "null") {
+                        if (eksikler.length > 0) {
+                            tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.mavi))
+                            Log.e("sad", eksikler)
+                        }
                     }
                 }
             })
+
         }
 
 

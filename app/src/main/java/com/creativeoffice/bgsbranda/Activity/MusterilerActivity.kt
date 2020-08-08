@@ -14,6 +14,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.PopupMenu
 import android.widget.Toast
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ import com.creativeoffice.bgsbranda.SiparisTurleriActivity.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_musteriler.*
+import kotlinx.android.synthetic.main.dialog_gidilen_musteri.view.*
 import kotlinx.android.synthetic.main.dialog_musteri_ekle.view.*
 import kotlinx.android.synthetic.main.dialog_siparis_ekle.view.*
 import java.lang.Exception
@@ -43,6 +45,7 @@ class MusterilerActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
     lateinit var userID: String
     lateinit var kullaniciAdi: String
+    lateinit var yetki: String
 
     var loading: Dialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +60,7 @@ class MusterilerActivity : AppCompatActivity() {
         butonlar()
 
         dialogCalistir()
-        Handler().postDelayed({ setupVeri() }, 1500)
+        setupVeri()
         Handler().postDelayed({ dialogGizle() }, 5000)
 
 
@@ -103,6 +106,8 @@ class MusterilerActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 kullaniciAdi = p0.child("user_name").value.toString()
+                yetki = p0.child("yetki").value.toString()
+
                 setupSpinner()
             }
         })
@@ -112,15 +117,12 @@ class MusterilerActivity : AppCompatActivity() {
     private fun butonlar() {
         imgMusteriEkle.setOnClickListener {
 
-
             var builder: AlertDialog.Builder = AlertDialog.Builder(this)
             var inflater: LayoutInflater = layoutInflater
             val viewDialog: View = inflater.inflate(R.layout.dialog_musteri_ekle, null)
 
             builder.setView(viewDialog)
             builder.setTitle("Müşteri Ekle")
-
-
             builder.setNegativeButton("İptal", object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     dialog!!.dismiss()
@@ -168,69 +170,142 @@ class MusterilerActivity : AppCompatActivity() {
                     override fun onDataChange(p0: DataSnapshot) {
                         for (ds in p0.children) {
                             var itemData = ds.getValue(MusteriData::class.java)!!
-
                             if (itemData.musteri_ad_soyad == arananMusteriAdi) {
-                                musteriKey = itemData.musteri_key.toString()
-                                var builder: AlertDialog.Builder = AlertDialog.Builder(this@MusterilerActivity)
-                                var viewDialog = View.inflate(this@MusterilerActivity, R.layout.dialog_siparis_ekle, null)
 
-                                builder.setTitle(itemData.musteri_ad_soyad)
+                                val popupMenu = PopupMenu(this@MusterilerActivity, imgMusteriAra)
+                                popupMenu.inflate(R.menu.search_menu)
+                                popupMenu.setOnMenuItemClickListener {
+                                    musteriKey = itemData.musteri_key.toString()
+                                    when (it.itemId) {
+                                        R.id.popSiparisGir -> {
 
-                                viewDialog.tvTente.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, MafsalliTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
+                                            var builder: AlertDialog.Builder = AlertDialog.Builder(this@MusterilerActivity)
+                                            var viewDialog = View.inflate(this@MusterilerActivity, R.layout.dialog_siparis_ekle, null)
+
+                                            builder.setTitle(itemData.musteri_ad_soyad)
+
+                                            viewDialog.tvTente.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, MafsalliTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+                                            }
+
+                                            viewDialog.tvKorukluTente.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, KorukluTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+                                            }
+
+                                            viewDialog.tvKisBahcesi.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, PergoleActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+                                            }
+                                            viewDialog.tvSemsiye.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, SemsiyeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+                                            }
+                                            viewDialog.tvKarpuz.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, KarpuzTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+                                            }
+                                            viewDialog.tvSeffaf.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, SeffafTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+                                            }
+                                            viewDialog.tvWintent.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, WintentActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+
+                                            }
+                                            viewDialog.tvDiger.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, DigerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+
+                                            }
+                                            viewDialog.tvTamir.setOnClickListener {
+                                                val intent = Intent(this@MusterilerActivity, TamirActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                                intent.putExtra("musteriKey", itemData.musteri_key)
+                                                startActivity(intent)
+
+                                            }
+
+                                            builder.setView(viewDialog)
+                                            var dialogSiparisTuru: Dialog = builder.create()
+                                            dialogSiparisTuru.show()
+
+                                        }
+                                        R.id.popMusteriDuzenle -> {
+                                            var dialogMsDznle: Dialog
+                                            var builder: AlertDialog.Builder = AlertDialog.Builder(this@MusterilerActivity)
+
+                                            var dialogView: View = View.inflate(this@MusterilerActivity, R.layout.dialog_gidilen_musteri, null)
+                                            builder.setView(dialogView)
+
+                                            dialogMsDznle = builder.create()
+                                            dialogView.tvAdSoyad.text = itemData.musteri_ad_soyad.toString()
+                                            dialogView.etAdresGidilen.setText(itemData.musteri_adres.toString())
+                                            dialogView.etTelefonGidilen.setText(itemData.musteri_tel.toString())
+
+                                            dialogView.imgCheck.setOnClickListener {
+
+                                                if (dialogView.etAdresGidilen.text.toString().isNotEmpty() && dialogView.etTelefonGidilen.text.toString().isNotEmpty()) {
+                                                    var adres = dialogView.etAdresGidilen.text.toString()
+                                                    var telefon = dialogView.etTelefonGidilen.text.toString()
+
+                                                    ref.child("Musteriler").child(musteriKey).child("musteri_adres").setValue(adres)
+                                                    ref.child("Musteriler").child(musteriKey).child("musteri_tel").setValue(telefon)
+                                                    Toast.makeText(this@MusterilerActivity, "Müşteri Bilgileri Güncellendi", Toast.LENGTH_LONG).show()
+                                                    dialogMsDznle.dismiss()
+
+                                                } else {
+                                                    Toast.makeText(this@MusterilerActivity, "Bilgilerde boşluklar var", Toast.LENGTH_LONG).show()
+                                                }
+                                            }
+                                            dialogView.imgBack.setOnClickListener {
+
+                                                dialogMsDznle.dismiss()
+                                            }
+
+                                            dialogMsDznle.setCancelable(false)
+
+                                            dialogMsDznle.show()
+                                        }
+                                        R.id.popSil -> {
+                                            if (yetki == "Yönetici") {
+                                                var alert = AlertDialog.Builder(this@MusterilerActivity)
+                                                    .setTitle("Müşteriyi Sil")
+                                                    .setMessage("Emin Misin ?")
+                                                    .setPositiveButton("Sil", object : DialogInterface.OnClickListener {
+                                                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                                                            ref.child("Musteriler").child(itemData.musteri_key.toString()).removeValue()
+                                                            startActivity(Intent(this@MusterilerActivity, MusterilerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                                                            ref.child("Silinenler/Musteriler").child(itemData.musteri_key.toString()).setValue(itemData)
+
+                                                        }
+                                                    })
+                                                    .setNegativeButton("İptal", object : DialogInterface.OnClickListener {
+                                                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                                                            p0!!.dismiss()
+                                                        }
+                                                    }).create()
+
+                                                alert.show()
+                                            }
+
+
+                                        }
+                                    }
+
+                                    return@setOnMenuItemClickListener true
                                 }
 
-                                viewDialog.tvKorukluTente.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, KorukluTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                   startActivity(intent)
-                                }
-
-                                viewDialog.tvKisBahcesi.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, PergoleActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-                                }
-                                viewDialog.tvSemsiye.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, SemsiyeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-                                }
-                                viewDialog.tvKarpuz.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, KarpuzTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-                                }
-                                viewDialog.tvSeffaf.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, SeffafTenteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-                                }
-                                viewDialog.tvWintent.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, WintentActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-
-                                }
-                                viewDialog.tvDiger.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, DigerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-
-                                }
-                                viewDialog.tvTamir.setOnClickListener {
-                                    val intent = Intent(this@MusterilerActivity, TamirActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                    intent.putExtra("musteriKey", itemData.musteri_key)
-                                    startActivity(intent)
-
-                                }
-
-                                builder.setView(viewDialog)
-                                var dialogSiparisTuru: Dialog = builder.create()
-                                dialogSiparisTuru.show()
-
+                                popupMenu.show()
 
 
                             }
