@@ -36,19 +36,19 @@ class SiparislerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_siparisler)
         setupNavigationView()
-
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
 
-        Toast.makeText(this, "Kırmızılar; Tamir, Sarılar; Ölçü Alınacak, Mavi;Eksik var", Toast.LENGTH_LONG).show()
-        setupVeri()
-        Handler().postDelayed({ dialogGizle() }, 3000)
+        Toast.makeText(this, "Kırmızılar; Tamir, \nSarılar; Ölçü Alınacak,\nMavi;Eksik var", Toast.LENGTH_LONG).show()
 
+        Handler().postDelayed({ dialogGizle() }, 3000)
         initMyAuthStateListener()
+
         mAuth = FirebaseAuth.getInstance()
         var user = mAuth.currentUser
         if (user != null) {
             userID = mAuth.currentUser!!.uid
+            setupVeri()
             dialogCalistir()
         } else {
             var intent = Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
