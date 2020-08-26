@@ -1765,7 +1765,6 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
 
-
                                     }
                                 })
                                 builder.setView(viewDialog)
@@ -1810,7 +1809,6 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                                         siparisRef.child(itemData.siparis_key.toString()).child("siparis_notu").setValue(siparisNot)
                                         siparisRef.child(itemData.siparis_key.toString()).child("tenteData").setValue(guncelData)
                                         myContext.startActivity(Intent(myContext, UretimActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-
 
 
                                     }
@@ -1866,6 +1864,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
         var siparisTuru = itemView.tvSiparisTuru
         var ureten = itemView.tvUretenAdi
         var uretenZaman = itemView.tvUretenZamani
+        var tvKumasKodu = itemView.tvKumasKodu
         var not = itemView.tvNot
         var tvEksikler = itemView.tvEksik
 
@@ -1879,6 +1878,7 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 }
                 musteriBilgileri(siparisData)
 
+
             } catch (e: IOException) {
                 Log.e("sad", siparisData.siparis_key.toString())
             }
@@ -1888,13 +1888,32 @@ class UretimAdapter(val myContext: Context, val uretimler: ArrayList<SiparisData
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
                     var eksikler = p0.child("eksikler").value.toString()
-                    if (eksikler != "null") {
+
+                    if (eksikler.toString() != "null") {
                         if (eksikler.length > 0) {
                             tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.mavi))
-                            tvEksikler.visibility =View.VISIBLE
-                            tvEksikler.text = "Eksikler; "+ eksikler
+                            tvEksikler.visibility = View.VISIBLE
+                            tvEksikler.text = "Eksikler; " + eksikler
                         }
+                    } else tvEksikler.visibility = View.GONE
+
+
+
+                    var kumas_rengi = p0.child("kumas_rengi").value.toString()
+                    var kumas_kodu = p0.child("kumaskodu").value.toString()
+
+                    Log.e("kumas rengi",kumas_rengi.toString())
+                    Log.e("kumas kodu",kumas_kodu.toString())
+
+
+                    if (kumas_rengi.toString() != "null") {
+                        tvKumasKodu.text = kumas_rengi.toString()
+                    } else if (kumas_kodu.toString() != "null") {
+                        tvKumasKodu.text = kumas_kodu.toString()
                     }
+
+
+
                 }
             })
         }

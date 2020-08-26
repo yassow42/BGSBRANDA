@@ -90,6 +90,8 @@ class SiparisAdapter(val myContext: Context, val siparisler: ArrayList<SiparisDa
         if (itemData.siparis_turu == "Tamir") {
             holder.tumLayout.setBackgroundColor(ContextCompat.getColor(myContext, R.color.turuncu))
         }
+
+
         holder.itemView.setOnClickListener {
             if (itemData.siparis_turu == "Mafsallı Tente") {
                 var builder: AlertDialog.Builder = AlertDialog.Builder(this.myContext)

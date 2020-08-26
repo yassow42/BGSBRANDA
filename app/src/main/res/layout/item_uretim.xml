@@ -28,15 +28,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:maxWidth="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="dsadsa dsa"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/tvNot"
-        app:layout_constraintEnd_toStartOf="@+id/tvNot"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvUretenZamani"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvNot" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEksik" />
 
     <TextView
         android:id="@+id/tvSiparisTuru"
@@ -71,41 +73,59 @@
         android:id="@+id/tvUretenZamani"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="dsadsadsa"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/tvNot"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tvNot"
-        app:layout_constraintTop_toTopOf="@+id/tvNot" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvUretenAdi"
+        app:layout_constraintTop_toBottomOf="@+id/tvEksik" />
 
     <TextView
         android:id="@+id/tvNot"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:textColor="@color/beyaz"
         android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/tvEksik"
-        app:layout_constraintEnd_toEndOf="@+id/tvSiparisTuru"
-        app:layout_constraintStart_toStartOf="@+id/tvSiparisTuru"
-        app:layout_constraintTop_toBottomOf="@+id/tvSiparisTuru" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvKumasKodu" />
 
     <TextView
         android:id="@+id/tvEksik"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Eksikler"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:textColor="@color/kirmizi"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvNot"
-        app:layout_constraintStart_toStartOf="@+id/tvNot" />
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNot" />
+
+    <TextView
+        android:id="@+id/tvKumasKodu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Kumaş Kodu"
+        android:textColor="@color/beyaz"
+        app:layout_constraintEnd_toEndOf="@+id/tvSiparisTuru"
+        app:layout_constraintStart_toStartOf="@+id/tvSiparisTuru"
+        app:layout_constraintTop_toBottomOf="@+id/tvSiparisTuru" />
 </androidx.constraintlayout.widget.ConstraintLayout>
