@@ -89,6 +89,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -145,6 +146,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -173,6 +175,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -208,6 +211,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -242,6 +246,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -271,6 +276,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -302,6 +308,7 @@
                         android:layout_margin="3dp"
                         android:background="@drawable/bg_edittext"
                         android:ems="7"
+                        android:maxWidth="220dp"
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
@@ -334,7 +341,8 @@
                         android:minHeight="35dp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/beyaz"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:maxWidth="220dp" />
 
                 </TableRow>
             </TableLayout>
